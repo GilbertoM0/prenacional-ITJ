@@ -1,0 +1,375 @@
+/* =================== MEDIA QUERIES =================== */
+/* 
+/* Tablet (<= 1024px) */
+@media screen and (max-width: 1024px) {
+    header {
+        height: auto;
+    }
+
+    .content {
+        margin-top: 150px;
+        height: auto;
+    }
+
+    .discipline {
+        font-size: 60px;
+        margin: 20px 0;
+    }
+
+   .navigation {
+        flex-direction: row; /* Que todo quede en una línea */
+        align-items: center; /* Centrado vertical */
+        justify-content: space-between; /* Espaciado entre elementos */
+        padding: 10px 20px;
+        height: auto;
+    }
+
+    .navigation li {
+        margin: 0 10px;
+    }
+
+    .navigation .preLogo {
+        
+        height: 0rem;
+        
+    }
+    .logo-container .preLogo {
+     margin-top: 50px;
+        height: 8.2rem;
+        transform: translateY(100px); /* Súbelo visualmente */
+        margin: 0 auto;
+        display: block;
+}
+
+    .navigation li a {
+        font-size: 1.6rem;
+        margin-right: 0;
+    }
+    .teamsM, .teamsF {
+        justify-content: center;
+    }
+
+    .teamsM .teamM,
+    .teamsF .teamF {
+        max-width: 100%;
+    }
+
+    .navigation {
+        font-size: 1.2rem;
+        flex-wrap: wrap;
+        padding: 19px 20px; 
+        a{
+           font-size: 21px; 
+           
+        }
+    }
+   
+
+    .groups .info {
+        padding: 10px 20px;
+    }
+
+    .info h3 {
+        font-size: 70px;
+    }
+
+    .sedesTitles h3 {
+        font-size: 70px;
+    }
+
+    .sedesOptions {
+        font-size: 30px;
+    }
+} 
+
+/* Mobile (<= 768px) */
+@media screen and (max-width: 768px) {
+    header {
+        height: auto;
+    }
+
+    .content {
+        margin-top: 150px;
+        height: auto;
+    }
+
+    .discipline {
+        font-size: 60px;
+        margin: 20px 0;
+    }
+
+    /*NAVIGATION*/
+   .navigation {
+        flex-direction: row; /* Que todo quede en una línea */
+        align-items: center; /* Centrado vertical */
+        justify-content: space-between; /* Espaciado entre elementos */
+        padding: 10px 20px;
+        height: auto;
+    }
+
+    .navigation li {
+        margin: 0 10px;
+    }
+
+    .navigation .preLogo {
+        
+        height: 0rem;
+        
+    }
+    .logo-container .preLogo {
+     margin-top: 50px;
+        height: 8.2rem;
+        transform: translateY(100px); /* Súbelo visualmente */
+        margin: 0 auto;
+        display: block;
+}
+
+    .navigation li a {
+        font-size: 1.1rem;
+        margin-right: 0;
+    }
+    
+
+    .pics {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .box {
+        width: 90%;
+        font-size: 22px;
+    }
+
+    .tecs img {
+        height: 50px;
+    }
+
+    .groups {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .groups .info h3 {
+        font-size: 50px;
+    }
+
+    .lblGroup {
+        max-width: 90%;
+        font-size: 20px;
+    }
+
+    .sections.titlePoints {
+        font-size: 30px;
+    }
+
+    .sedesInfo {
+        padding: 20px;
+        align-items: center;
+    }
+
+    .sedesTitles,
+    .sedesOptions {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .ribbonBack .carImg img {
+        width: 150px;
+        height: auto;
+    }
+
+    .card {
+        width: 90%;
+        margin: 0 auto;
+    }
+    /*ASISTENCIA*/
+    
+.playersTeam {
+    display: flex;
+    align-items: center;
+}
+
+.playersTeam.af { 
+    justify-content: end; 
+    margin-bottom: 100px;
+}
+
+.playersTeam.af.disabled,
+.playersTeam.bf.disabled { display: none; }
+
+.nextPlayer,
+.prevPlayer {
+    position: relative;
+    top: 10em; /* <-- Esto los baja ligeramente */
+    left: -65px; /* <-- Esto los desplaza a la derecha */
+    margin-left: 4%;
+    background-color: var(--black);
+    border-radius: 100%;
+    width: 45px;
+    height: 39px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.nextPlayer::before,
+.prevPlayer::before {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 39px;
+    border: 1px solid var(--white);
+    border-radius: 100%;
+    pointer-events: none;
+}
+
+.nextPlayer ion-icon,
+.prevPlayer ion-icon { 
+    font-size: 25px; 
+    color: var(--white);
+}
+
+.nextPlayer.disabled,
+.prevPlayer.disabled { 
+    display: none; 
+}
+
+
+    /* SEMIFINALES Y FINALES*/
+    .semifinals {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        gap: 30px;
+        padding: 20px;
+    }
+
+    #finals {
+        flex-direction: column-reverse; /* Para que quede al revés */
+    }
+
+    .semiLeft,
+    .semiRight {
+        padding: 0;
+        height: auto;
+    }
+
+    .semiLeft h3 {
+        font-size: 50px;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .semiTitle {
+        width: 60%;
+        height: 3px;
+        margin-top: 10px;
+    }
+
+    .backRed img {
+        width: 250px;
+        height: auto;
+        opacity: 0.8;
+    }
+
+    .semiContainer {
+        width: 100%;
+        gap: 15px;
+    }
+
+    .wrapper {
+        height: auto;
+        padding: 10px;
+    }
+
+    .infoCont {
+        font-size: 12px;
+        flex-wrap: wrap;
+    }
+
+    .teamsCont {
+        grid-template-columns: 35% 30% 35%;
+        font-size: 20px;
+    }
+
+    .teamsCont .firstTeam,
+    .teamsCont .secondTeam {
+        font-size: 16px;
+        padding: 5px;
+    }
+
+    .imgWrapper,
+    .imgWrapper.scnd {
+        display: none; /* Ocultamos imágenes para evitar saturación visual */
+    }
+
+    .canchaCont {
+        width: 90%;
+        font-size: 14px;
+        padding: 5px;
+    }
+    /* FOOTER RESPONSIVE */
+    .footer {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        gap: 30px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .escudo,
+    .emergency,
+    .tecnm,
+    .itj {
+        width: 100%;
+        height: auto;
+        align-items: center;
+    }
+
+    .escudo {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .escudo .tec {
+        width: 80px;
+        margin-bottom: 10px;
+        transform: none;
+    }
+
+    .escudo .socialLink {
+        width: auto;
+        margin: 5px;
+    }
+
+    .escudo .socialText {
+        display: none; /* En móviles no mostrar texto flotante */
+    }
+
+    .emergPhone {
+        font-size: 20px;
+    }
+
+    .emerPhones {
+        width: 100%;
+        padding-top: 10px;
+        gap: 15px;
+    }
+
+    .phoneText {
+        font-size: 15px;
+    }
+
+    .phones img {
+        width: 20px;
+    }
+
+    .bfFooter {
+        height: 8px;
+    }
+}
