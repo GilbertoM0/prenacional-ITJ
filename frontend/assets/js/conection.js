@@ -1335,11 +1335,10 @@ async function getImagenesCarousel() {
         console.error('Error cargando los tecs:', error);
     }
 }
-
 /* =================== FETCH =================== */
 async function fetchDisciplines() {
     try {
-        const response = await fetch('http://localhost:3000/api/disciplinas');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/disciplinas');
         if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
     } catch(error) {
@@ -1350,7 +1349,7 @@ async function fetchDisciplines() {
 
 async function fetchClasificacion() {
     try {
-        const response = await fetch('http://localhost:3000/api/clasificacion');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/clasificacion');
         if(!response.ok) throw new Error(`Error ${response.status}`);
         return response.json();
     } catch(error) {
@@ -1361,7 +1360,7 @@ async function fetchClasificacion() {
 
 async function fetchGroups() {
     try {
-        const response = await fetch('http://localhost:3000/api/grupos');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/grupos');
         if(!response.ok) throw new Error(`Error ${response.status}`);
         return response.json();
     } catch(error) {
@@ -1372,7 +1371,7 @@ async function fetchGroups() {
 
 async function fetchEquipos() {    
     try {
-        const response = await fetch('http://localhost:3000/api/equipo');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/equipo');
         if(!response.ok) throw new Error(`Error ${response.status}`);
         return response.json();
     } catch(error) {
@@ -1383,7 +1382,7 @@ async function fetchEquipos() {
 
 async function fetchTecs() {
     try {
-        const response = await fetch('http://localhost:3000/api/tecs');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/tecs');
         if(!response.ok) throw new Error(`Error ${response.status}`);
         return response.json();
     } catch(error) {
@@ -1394,7 +1393,7 @@ async function fetchTecs() {
 
 async function fetchSedes() {
     try {
-        const response = await fetch('http://localhost:3000/api/cancha');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/cancha');
         if(!response.ok) throw new Error(`Error ${response.status}`); 
         return response.json();
     } catch(error) {
@@ -1405,7 +1404,7 @@ async function fetchSedes() {
 
 async function fetchPuntosdeInteres() {
     try {
-        const response = await fetch('http://localhost:3000/api/puntosdeinteres');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/puntosdeinteres');
         if(!response.ok) throw new Error(`Error ${response.status}`);
         return response.json();
     } catch(error) {
@@ -1416,18 +1415,18 @@ async function fetchPuntosdeInteres() {
 
 async function fetchJugadores() {
     try {
-        const response = await fetch('http://localhost:3000/api/jugador');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/jugador');
         if(!response.ok) throw new Error(`Error ${response.status}`);
         return response.json();
     } catch(error) {
-        console.log('Error fetching puntos de interés:', error);
+        console.log('Error fetching jugadores:', error);
         return [];
     }
 }
 
 async function fetchPartidos() {
     try {
-        const response = await fetch('http://localhost:3000/api/partido');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/partido');
         if(!response.ok) throw new Error(`Error ${response.status}`);
         return response.json();
     } catch(error) {
@@ -1438,7 +1437,7 @@ async function fetchPartidos() {
 
 async function fetchRoldeJuegos() {
     try {
-        const response = await fetch('http://localhost:3000/api/roldejuegos');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/roldejuegos');
         if(!response.ok) throw new Error(`Error ${response.status}`);
         return response.json();
     } catch(error) {
