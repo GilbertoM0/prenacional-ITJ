@@ -1138,36 +1138,47 @@ async function initializeGroups() {
         console.log('Grupos obtenidos:', groups);
 
         currentGroups = groups.filter(g => g.disciplinaid === disciplineId);
-        console.log('Grupos filtrados:', currentGroups);        
+        console.log('Grupos filtrados:', currentGroups);
 
+        // Verificar que hay grupos disponibles
+        if (currentGroups.length === 0) {
+            console.log('No hay grupos para esta disciplina');
+            updateGroupNavigation(); // Esto mostrará "No hay grupos disponibles"
+            return;
+        }
+
+        // Establecer el índice actual al primer grupo (o al 0 por defecto)
+        currentGroupIndex = 0;
+        
+        // Actualizar la UI de navegación de grupos
         updateGroupNavigation();
-
-        const groupName = document.querySelector('.lblGroup h1').textContent.trim().toLowerCase();
-        console.log('Nombre: ', groupName);
-        const currentGroup = currentGroups.find(g => g.nombre.toLowerCase() === groupName);
-        if (!currentGroup) console.log('Grupo no encontrado');
-        else console.log('Grupo: ', currentGroup);
-
+        
+        // Obtener equipos del grupo actual
+        const currentGroup = currentGroups[currentGroupIndex];
         const teams = await getTeamsByGroup(currentGroup.id_grupo);
         console.log('Equipos del grupo: ', teams);
         await renderTeams(teams);
-        
-        currentGroupIndex = currentGroups.findIndex(g => g.id_grupo === currentGroup.id_grupo);
 
+        // Cargar sedes
         const sedes = await getSedeByTitle();
         console.log('Sedes: ', sedes);        
         currentSede = sedes[0];
-        await updateCardWithData(currentSede);
-        await updateCarousel();
+        if(currentSede) {
+            await updateCardWithData(currentSede);
+            await updateCarousel();
+        }
 
+        // Configurar eventos
         document.querySelector('.groupPrev').addEventListener('click', prevGroup);
         document.querySelector('.groupNext').addEventListener('click', nextGroup);
         document.querySelector('.prevPlayer').addEventListener('click', prevTeam);
         document.querySelector('.nextPlayer').addEventListener('click', nextTeam);
+        
+        // Actualizar equipos del grupo
         await updateGroupTeam();        
 
+        // Actualizar semifinales y posiciones
         await updatePhase(disciplineId);
-
         await positionsHTML(disciplineId);
 
     } catch (error) {
