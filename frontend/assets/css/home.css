@@ -764,6 +764,43 @@ header {
     color: var(--white);
 }
 
+/* CALENDAR  */
+.calendar {
+    width: 100vw;
+    font-size: 0.85rem;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .calendar table {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+  }
+
+  .calendar thead {
+    font-size: 1rem;
+  }
+
+  .calendar th,
+  .calendar td {
+    padding: 8px 4px;
+    font-size: 0.85rem;
+    word-wrap: break-word;
+  }
+
+  .calendar tbody td:hover {
+    transform: none;
+    box-shadow: none;
+    background-color: #f5f3ff;
+  }
+
+  .calendar tbody td.today {
+    font-size: 0.95rem;
+    padding: 8px 4px;
+  }
+
 }
 
 
