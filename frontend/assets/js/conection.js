@@ -1211,7 +1211,7 @@ async function getPartidosByFase(fase) {
 
 async function getPlayersByTeam(equipoid) {
     try {
-        const players = await fetchJugadores();
+        const players = await fetchPlayers();
         return players.filter(p => p.equipoid === equipoid);
     } catch(error) {
         console.error('Error obteniendo jugadores: ', error);
@@ -1221,7 +1221,7 @@ async function getPlayersByTeam(equipoid) {
 
 async function getNearestPoints(canchaid) {
     try {
-        const points = await fetchPuntosdeInteres();
+        const points = await fetchPuntosDeInteres();
         return points.filter(p => p.canchaid === canchaid);
     } catch(error) {
         console.error('Error obteniendo puntos cercanos:', error);
@@ -1231,7 +1231,7 @@ async function getNearestPoints(canchaid) {
 
 async function getSedeById(canchaid) {
     try {
-        const canchas = await fetchSedes();
+        const canchas = await fetchCancha();
         return canchas.find(c => c.id_cancha === canchaid);
     } catch(error) {
         console.error('Error obteniendo sede por ID:', error);
@@ -1259,7 +1259,7 @@ async function getSedeByTitle() {
 
 async function getTeamsByDiscipline(disciplineId) {
     try {
-        const teams = await fetchEquipos();
+        const teams = await fetchTeams();
         return teams.filter(t => t.diciplinaid === disciplineId);
     } catch(error) {
         console.error('Error obteniendo puntos:', error);
@@ -1344,115 +1344,5 @@ async function getImagenesCarousel() {
         });
     } catch(error) {
         console.error('Error cargando los tecs:', error);
-    }
-}
-/* =================== FETCH =================== */
-async function fetchDisciplines() {
-    try {
-        const response = await fetch('https://back-prenacional-production.up.railway.app/api/disciplinas');
-        if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-        return response.json();
-    } catch(error) {
-        console.error('Error obteniendo disciplinas:', error);
-        return [];
-    }
-}
-
-async function fetchClasificacion() {
-    try {
-        const response = await fetch('https://back-prenacional-production.up.railway.app/api/clasificacion');
-        if(!response.ok) throw new Error(`Error ${response.status}`);
-        return response.json();
-    } catch(error) {
-        console.log('Error fetching clasificacion:', error);
-        return [];
-    }
-}
-
-async function fetchGroups() {
-    try {
-        const response = await fetch('https://back-prenacional-production.up.railway.app/api/grupos');
-        if(!response.ok) throw new Error(`Error ${response.status}`);
-        return response.json();
-    } catch(error) {
-        console.log('Error fetching groups:', error);
-        return [];
-    }
-}
-
-async function fetchEquipos() {    
-    try {
-        const response = await fetch('https://back-prenacional-production.up.railway.app/api/equipo');
-        if(!response.ok) throw new Error(`Error ${response.status}`);
-        return response.json();
-    } catch(error) {
-        console.log('Error fetching teams:', error);
-        return [];
-    }
-}
-
-async function fetchTecs() {
-    try {
-        const response = await fetch('https://back-prenacional-production.up.railway.app/api/tecs');
-        if(!response.ok) throw new Error(`Error ${response.status}`);
-        return response.json();
-    } catch(error) {
-        console.log('Error fetching tecs:', error);
-        return [];
-    }
-}
-
-async function fetchSedes() {
-    try {
-        const response = await fetch('https://back-prenacional-production.up.railway.app/api/cancha');
-        if(!response.ok) throw new Error(`Error ${response.status}`); 
-        return response.json();
-    } catch(error) {
-        console.log('Error fetching sedes:', error);  
-        return [];
-    }
-}
-
-async function fetchPuntosdeInteres() {
-    try {
-        const response = await fetch('https://back-prenacional-production.up.railway.app/api/puntosdeinteres');
-        if(!response.ok) throw new Error(`Error ${response.status}`);
-        return response.json();
-    } catch(error) {
-        console.log('Error fetching puntos de interés:', error);
-        return [];
-    }
-}
-
-async function fetchJugadores() {
-    try {
-        const response = await fetch('https://back-prenacional-production.up.railway.app/api/jugador');
-        if(!response.ok) throw new Error(`Error ${response.status}`);
-        return response.json();
-    } catch(error) {
-        console.log('Error fetching jugadores:', error);
-        return [];
-    }
-}
-
-async function fetchPartidos() {
-    try {
-        const response = await fetch('https://back-prenacional-production.up.railway.app/api/partido');
-        if(!response.ok) throw new Error(`Error ${response.status}`);
-        return response.json();
-    } catch(error) {
-        console.log('Error fetching partidos: ', error);
-        return [];
-    }
-}
-
-async function fetchRoldeJuegos() {
-    try {
-        const response = await fetch('https://back-prenacional-production.up.railway.app/api/roldejuegos');
-        if(!response.ok) throw new Error(`Error ${response.status}`);
-        return response.json();
-    } catch(error) {
-        console.log('Error fetching roles de juegos: ', error);
-        return [];
     }
 }

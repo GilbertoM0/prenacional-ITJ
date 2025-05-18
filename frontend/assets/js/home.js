@@ -173,13 +173,11 @@ function handleMenuError(error) {
 }
 
 /* ========================================== FETCH ========================================== */
-async function fetchDisciplines() {
-  try {
-      const response = await fetch('https://back-prenacional-production.up.railway.app/api/disciplinas');
-      if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-      return response.json();
-  } catch(error) {
-      console.error('Error obteniendo disciplinas:', error);
-      return [];
-  }
-}
+// Refactor: Usar funciones de la carpeta api/ para acceso a datos
+// Asegúrate de incluir globalVariables.js y los archivos de api/ en el HTML antes de este script
+
+// Reemplaza todos los fetch* por las funciones importadas de la carpeta api/
+// Por ejemplo:
+// - fetchDisciplines() -> fetchDisciplines() de api/disciplinas.js
+
+// El resto de la lógica de UI y helpers permanece igual, pero todo acceso a datos debe ser por las funciones de la carpeta api/

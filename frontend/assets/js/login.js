@@ -296,24 +296,12 @@ async function getUserByName(name) {
 }
 
 /* ========================================== FETCH ========================================== */
-async function fetchDisciplines() {
-  try {
-      const response = await fetch('http://localhost:3000/api/disciplinas');
-      if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-      return response.json();
-  } catch(error) {
-      console.error('Error obteniendo disciplinas:', error);
-      return [];
-  }
-}
+// Refactor: Usar funciones de la carpeta api/ para acceso a datos
+// Asegúrate de incluir globalVariables.js y los archivos de api/ en el HTML antes de este script
 
-async function fetchUsers() {
-  try {
-    const response = await fetch('http://localhost:3000/api/user');
-    if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-    return response.json();
-  } catch(error) {
-      console.error('Error obteniendo usuarios:', error);
-      return [];
-  }
-}
+// Reemplaza todos los fetch* por las funciones importadas de la carpeta api/
+// Por ejemplo:
+// - fetchDisciplines() -> fetchDisciplines() de api/disciplinas.js
+// - fetchUsers() -> (debería estar en un api/users.js si lo necesitas)
+
+// El resto de la lógica de UI y helpers permanece igual, pero todo acceso a datos debe ser por las funciones de la carpeta api/
