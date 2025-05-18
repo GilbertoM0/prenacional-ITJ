@@ -229,6 +229,8 @@ async function setupOption() {
             container.removeEventListener('click', SubOptionG);
             container.removeEventListener('click', SubOptionE);
             container.removeEventListener('click', SubOptionJ);
+            container.removeEventListener('click', SubOptionP);
+            container.removeEventListener('click', SubOptionC);
 
             // Delegación de eventos para sub-opciones
             if (opt === 'Grupo')
@@ -237,6 +239,10 @@ async function setupOption() {
                 container.addEventListener('click', SubOptionE);
             else if (opt === 'Jugador')
                 container.addEventListener('click', SubOptionJ);            
+            else if (opt === 'Partido')
+                container.addEventListener('click', SubOptionP);            
+            else if (opt === 'Clasificacion')
+                container.addEventListener('click', SubOptionC);            
         });
     }));
 }
@@ -714,6 +720,158 @@ async function SubOptionJ(e) {
         document.getElementById('delete').addEventListener('click', DeletePlayer);
     }
 }
+async function SubOptionP(e) {
+    const container = document.querySelector('.info');
+    const targetClass = e.target.classList;
+
+    const addBtn = targetClass.contains('Add');
+    const modBtn = targetClass.contains('Mod');
+    const searBtn = targetClass.contains('Sear');
+    const delBtn = targetClass.contains('Del');
+
+    if (addBtn) {
+        const disciplineList = await getDisciplineByName();
+        const ids = disciplineList.map(d => d.id_diciplinas);
+        const matches = await getTeamsByDiscipline(ids);
+
+        const options = matches.map(team => 
+            `<option value="${team.id_equipo}">${team.nombre || 'Sin nombre'}</option>`).join('');
+
+        container.innerHTML = `
+            <div class="category team">
+                <div class="teamOpt">
+                    <p class="title">EQUIPO A</p>
+                    <select class="input selector team" id="equipoA">${options}</select>
+                </div>
+                <div class="teamOpt">
+                    <p class="title">EQUIPO B</p>
+                    <select class="input selector team" id="equipoB">${options}</select>
+                </div>
+            </div>
+            <div class="category">
+                <div class="teamOpt">
+                    <p class="title">FECHA</p>
+                    <input class="input selector team" id="fecha" type="date">
+                </div>
+                <div class="teamOpt">
+                    <p class="title">HORA</p>
+                    <input class="input selector team" id="hora" type="time">
+                </div>
+            </div>
+            <button class="btns" id="save">GUARDAR</button>
+        `;
+
+        setTimeout(() => {
+            document.getElementById('save')?.addEventListener('click', NewMatch);
+        }, 0);
+    }
+
+    if (modBtn) {
+        const matches = await getAllMatches();
+
+        const options = matches.map(m => 
+            `<option value="${m.id_partido}">${m.nombre || `Partido ${m.id_partido}`}</option>`).join('');
+
+        container.innerHTML = `
+            <div class="modify">
+                <p>SELECCIONE EL PARTIDO A MODIFICAR</p>                
+                <select class="input selector m" id="matchS">${options}</select>
+            </div>
+            <button class="btns" id="select">SELECCIONAR</button>
+        `;
+
+        document.getElementById('select').addEventListener('click', SelectMatch);
+    }
+
+    if (searBtn) {
+        container.innerHTML = `
+            <div class="modify">
+                <p>BUSCAR POR FECHA</p>
+                <input class="input m" id="fecha" type="date">
+            </div>
+            <button class="btns" id="search">BUSCAR</button>
+        `;
+
+        document.getElementById('search').addEventListener('click', SearchMatch);
+    }
+
+    if (delBtn) {
+        const matches = await getAllMatches();
+
+        const options = matches.map(m =>
+            `<option value="${m.id_partido}">${m.nombre || `Partido ${m.id_partido}`}</option>`).join('');
+
+        container.innerHTML = `
+            <div class="modify">
+                <p>SELECCIONE EL PARTIDO A ELIMINAR</p>                
+                <select class="input selector m" id="matchS">${options}</select>
+            </div>
+            <button class="btns" id="delete">ELIMINAR</button>
+        `;
+
+        document.getElementById('delete').addEventListener('click', DeleteMatch);
+    }
+}
+
+async function SubOptionC(e) {
+    const container = document.querySelector('.info');
+    const targetClass = e.target.classList;
+
+    const addBtn = targetClass.contains('Add');
+    const modBtn = targetClass.contains('Mod');
+    const searBtn = targetClass.contains('Sear');
+    const delBtn = targetClass.contains('Del');
+
+    if (addBtn) {
+        const disciplineList = await getDisciplineByName();
+        const ids = disciplineList.map(d => d.id_diciplinas);
+        const groups = await getGroupsByDiscipline(ids);
+
+        const groupOptions = groups.map(group => 
+            `<option value="${group.id_grupo}">${group.nombre}</option>`).join('');
+
+        container.innerHTML = `
+            <div class="modify">
+                <p>SELECCIONE EL GRUPO</p>
+                <select class="input selector m" id="groupS">${groupOptions}</select>
+            </div>
+            <button class="btns" id="save">CALCULAR CLASIFICACIÓN</button>
+        `;
+
+        setTimeout(() => {
+            document.getElementById('save')?.addEventListener('click', CalculateClasification);
+        }, 0);
+    }
+
+    if (modBtn) {
+        container.innerHTML = `<p>No se puede modificar una clasificación directamente.</p>`;
+    }
+
+    if (searBtn) {
+        const disciplineList = await getDisciplineByName();
+        const ids = disciplineList.map(d => d.id_diciplinas);
+        const groups = await getGroupsByDiscipline(ids);
+
+        const groupOptions = groups.map(group =>
+            `<option value="${group.id_grupo}">${group.nombre}</option>`).join('');
+
+        container.innerHTML = `
+            <div class="modify">
+                <p>SELECCIONE EL GRUPO PARA CONSULTAR LA CLASIFICACIÓN</p>
+                <select class="input selector m" id="groupS">${groupOptions}</select>
+            </div>
+            <button class="btns" id="search">BUSCAR</button>
+        `;
+
+        document.getElementById('search').addEventListener('click', SearchClasification);
+    }
+
+    if (delBtn) {
+        container.innerHTML = `<p>No es posible eliminar una clasificación directamente.</p>`;
+    }
+}
+
+
 
 /* ========================================== OPCIONES ========================================== */
 async function NewGroup() {

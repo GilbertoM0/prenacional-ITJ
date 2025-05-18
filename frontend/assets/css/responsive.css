@@ -195,36 +195,7 @@
 }
 
 
-    /*ASISTENCIA*/
     
-.playersTeam {
-    display: flex;
-    align-items: center;
-}
-
-.playersTeam.af { 
-    justify-content: end; 
-    margin-bottom: 100px;
-}
-
-.playersTeam.af.disabled,
-.playersTeam.bf.disabled { display: none; }
-
-.nextPlayer,
-.prevPlayer {
-    position: relative;
-    top: 10em; /* <-- Esto los baja ligeramente */
-    left: -65px; /* <-- Esto los desplaza a la derecha */
-    margin-left: 4%;
-    background-color: var(--black);
-    border-radius: 100%;
-    width: 45px;
-    height: 39px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
 
 
 
@@ -255,6 +226,7 @@
 
     /* SEMIFINALES Y FINALES*/
     .semifinals {
+        margin-top: 50%;
         display: flex;
         flex-direction: column;
         height: auto;
@@ -423,5 +395,9 @@
 
     .bfFooter {
         height: 8px;
+    }
+/* Elimine lista de jugadores abajo de canchas porque no deberia ir eso en mobile  */
+    .list{
+        height: 0px;
     }
 }

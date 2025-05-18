@@ -407,6 +407,69 @@ header {
   letter-spacing: 0px;
 }
 
+/* ================================================================== */
+    /* ====================== Calendario ====================== */
+/* ================================================================== */
+/* ====================== Calendario Minimalista Animado ====================== */
+
+.calendar {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+  margin-top: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background-color: #fff;
+  user-select: none;
+}
+
+.calendar table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar thead {
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.calendar th,
+.calendar td {
+  padding: 15px 10px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: default;
+}
+
+/* Animación al pasar el cursor por celdas (menos header) */
+.calendar tbody td:hover {
+  background-color: #f5f3ff;
+  color: #4a3aff;
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Días actuales destacados */
+.calendar tbody td.today {
+  background-color: #764ba2;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 0 10px #764ba2aa;
+  transition: background-color 0.5s ease;
+}
+
+/* Transición suave para toda la tabla */
+.calendar table,
+.calendar thead,
+.calendar tbody {
+  transition: all 0.3s ease;
+}
 
 
 
