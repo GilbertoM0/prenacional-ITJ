@@ -298,7 +298,7 @@ async function getUserByName(name) {
 /* ========================================== FETCH ========================================== */
 async function fetchDisciplines() {
   try {
-      const response = await fetch('http://localhost:3000/api/disciplinas');
+      const response = await fetch('https://back-prenacional-production.up.railway.app/api/disciplinas');
       if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
       return response.json();
   } catch(error) {
@@ -309,7 +309,7 @@ async function fetchDisciplines() {
 
 async function fetchUsers() {
   try {
-    const response = await fetch('http://localhost:3000/api/user');
+    const response = await fetch('https://back-prenacional-production.up.railway.app/api/user');
     if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
     return response.json();
   } catch(error) {

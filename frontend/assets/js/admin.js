@@ -2061,272 +2061,225 @@ async function getPlayerDisc(teamID) {
         return null;
     }
 }
+const API_BASE = 'https://back-prenacional-production.up.railway.app/api';
 
-/* ========================================== POST ========================================== */
+// ========================================== POST ==========================================
 async function createGroup(groupData) {
     try {
-        const response = await fetch('http://localhost:3000/api/grupos', {
+        const response = await fetch(`${API_BASE}/grupos`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(groupData)
         });
-
         return response.json();
-    } catch(error) {
+    } catch (error) {
         console.error('Error en createGroupInDatabase:', error);
-        return { 
-            success: false, 
-            message: 'Error de conexión con el servidor' 
-        };
+        return { success: false, message: 'Error de conexión con el servidor' };
     }
 }
 
 async function createTeam(groupData) {
     try {
-        const response = await fetch('http://localhost:3000/api/equipo', {
+        const response = await fetch(`${API_BASE}/equipo`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(groupData)
         });
-
         return response.json();
-    } catch(error) {
+    } catch (error) {
         console.error('Error en createTeamInDatabase:', error);
-        return { 
-            success: false, 
-            message: 'Error de conexión con el servidor' 
-        };
+        return { success: false, message: 'Error de conexión con el servidor' };
     }
 }
 
 async function createPlayer(groupData) {
     try {
-        const response = await fetch('http://localhost:3000/api/jugador', {
+        const response = await fetch(`${API_BASE}/jugador`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(groupData)
         });
-
         return response.json();
-    } catch(error) {
+    } catch (error) {
         console.error('Error en createPlayerInDatabase:', error);
-        return { 
-            success: false, 
-            message: 'Error de conexión con el servidor' 
-        };
+        return { success: false, message: 'Error de conexión con el servidor' };
     }
 }
 
 async function modifyGroup(groupData, ID) {
     try {
-        const response = await fetch(`http://localhost:3000/api/grupos/${ID}?`, {
+        const response = await fetch(`${API_BASE}/grupos/${ID}`, {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(groupData)
         });
-
         return response.json();
-    } catch(error) {
+    } catch (error) {
         console.error('Error en modifyGroupInDatabase:', error);
-        return { 
-            success: false, 
-            message: 'Error de conexión con el servidor' 
-        };
+        return { success: false, message: 'Error de conexión con el servidor' };
     }
 }
 
 async function modifyTeam(groupData, ID) {
     try {
-        const response = await fetch(`http://localhost:3000/api/equipo/${ID}?`, {
+        const response = await fetch(`${API_BASE}/equipo/${ID}`, {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(groupData)
         });
-
         return response.json();
-    } catch(error) {
+    } catch (error) {
         console.error('Error en modifyTeamInDatabase:', error);
-        return { 
-            success: false, 
-            message: 'Error de conexión con el servidor' 
-        };
+        return { success: false, message: 'Error de conexión con el servidor' };
     }
 }
 
 async function deleteGroup(ID) {
     try {
-        const response = await fetch(`http://localhost:3000/api/grupos/${ID}`, {
+        const response = await fetch(`${API_BASE}/grupos/${ID}`, {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            }
+            headers: { 'Content-Type': 'application/json' }
         });
-
         return response.json();
-    } catch(error) {
+    } catch (error) {
         console.error('Error en deleteGroupInDatabase:', error);
-        return { 
-            success: false, 
-            message: 'Error de conexión con el servidor' 
-        };
+        return { success: false, message: 'Error de conexión con el servidor' };
     }
 }
 
 async function deleteTeam(ID) {
     try {
-        const response = await fetch(`http://localhost:3000/api/equipo/${ID}`, {
+        const response = await fetch(`${API_BASE}/equipo/${ID}`, {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            }
+            headers: { 'Content-Type': 'application/json' }
         });
-
         return response.json();
-    } catch(error) {
+    } catch (error) {
         console.error('Error en deleteTeamInDatabase:', error);
-        return { 
-            success: false, 
-            message: 'Error de conexión con el servidor' 
-        };
+        return { success: false, message: 'Error de conexión con el servidor' };
     }
 }
 
 async function deletePlayer(ID) {
     try {
-        const response = await fetch(`http://localhost:3000/api/jugador/${ID}`, {
+        const response = await fetch(`${API_BASE}/jugador/${ID}`, {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            }
+            headers: { 'Content-Type': 'application/json' }
         });
-
         return response.json();
-    } catch(error) {
+    } catch (error) {
         console.error('Error en deletePlayerInDatabase:', error);
-        return { 
-            success: false, 
-            message: 'Error de conexión con el servidor' 
-        };
+        return { success: false, message: 'Error de conexión con el servidor' };
     }
 }
 
-/* ========================================== FETCH ========================================== */
+// ========================================== FETCH ==========================================
 async function fetchDisciplines() {
-  try {
-      const response = await fetch('http://localhost:3000/api/disciplinas');
-      if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-      return response.json();
-  } catch(error) {
-      console.error('Error obteniendo disciplinas:', error);
-      return [];
-  }
+    try {
+        const response = await fetch(`${API_BASE}/disciplinas`);
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        return response.json();
+    } catch (error) {
+        console.error('Error obteniendo disciplinas:', error);
+        return [];
+    }
 }
 
 async function fetchGroups() {
     try {
-        const response = await fetch('http://localhost:3000/api/grupos');
-        if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        const response = await fetch(`${API_BASE}/grupos`);
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
-    } catch(error) {
+    } catch (error) {
         console.error('Error obteniendo grupos: ', error);
         return [];
-    } 
+    }
 }
 
 async function fetchTeams() {
     try {
-        const response = await fetch('http://localhost:3000/api/equipo');
-        if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        const response = await fetch(`${API_BASE}/equipo`);
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
-    } catch(error) {
+    } catch (error) {
         console.error('Error obteniendo equipos: ', error);
         return [];
-    } 
+    }
 }
 
 async function fetchTecs() {
     try {
-        const response = await fetch('http://localhost:3000/api/tecs');
-        if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        const response = await fetch(`${API_BASE}/tecs`);
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
-    } catch(error) {
+    } catch (error) {
         console.error('Error obteniendo tecs: ', error);
         return [];
-    } 
+    }
 }
 
 async function fetchPlayers() {
     try {
-        const response = await fetch('http://localhost:3000/api/jugador');
-        if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        const response = await fetch(`${API_BASE}/jugador`);
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
-    } catch(error) {
+    } catch (error) {
         console.error('Error obteniendo jugadores: ', error);
         return [];
-    } 
+    }
 }
 
 async function fetchPartidos() {
     try {
-        const response = await fetch('http://localhost:3000/api/partido');
-        if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        const response = await fetch(`${API_BASE}/partido`);
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
-    } catch(error) {
+    } catch (error) {
         console.error('Error obteniendo partidos: ', error);
         return [];
-    } 
+    }
 }
 
 async function fetchRoles() {
     try {
-        const response = await fetch('http://localhost:3000/api/roldejuegos');
-        if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        const response = await fetch(`${API_BASE}/roldejuegos`);
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
-    } catch(error) {
-        console.error('Error obteniendo partidos: ', error);
+    } catch (error) {
+        console.error('Error obteniendo roles de juego: ', error);
         return [];
-    } 
+    }
 }
 
 async function fetchClasificacion() {
     try {
-        const response = await fetch('http://localhost:3000/api/clasificacion');
-        if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        const response = await fetch(`${API_BASE}/clasificacion`);
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
-    } catch(error) {
-        console.error('Error obteniendo clasificacion: ', error);
+    } catch (error) {
+        console.error('Error obteniendo clasificación: ', error);
         return [];
-    } 
+    }
 }
 
 async function fetchCancha() {
     try {
-        const response = await fetch('http://localhost:3000/api/cancha');
-        if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        const response = await fetch(`${API_BASE}/cancha`);
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
-    } catch(error) {
+    } catch (error) {
         console.error('Error obteniendo cancha: ', error);
         return [];
-    } 
+    }
 }
 
 async function fetchRestaurantes() {
     try {
-        const response = await fetch('http://localhost:3000/api/puntosdeinteres');
-        if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        const response = await fetch(`${API_BASE}/puntosdeinteres`);
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
-    } catch(error) {
+    } catch (error) {
         console.error('Error obteniendo puntos de interés: ', error);
         return [];
-    } 
+    }
 }
