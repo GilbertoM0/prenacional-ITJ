@@ -221,7 +221,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const calendarDiv = document.querySelector(".calendar");
 
   try {
-    // Cargamos los datos necesarios
     const [rolRes, equiposRes, disciplinasRes] = await Promise.all([
       fetch("https://back-prenacional-production.up.railway.app/api/rolDeJuegos"),
       fetch("https://back-prenacional-production.up.railway.app/api/equipo"),
@@ -232,9 +231,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const equipos = await equiposRes.json();
     const disciplinas = await disciplinasRes.json();
 
-    // Creamos diccionarios para acceder rápido por ID
+    // Diccionario de equipos
     const equiposMap = Object.fromEntries(equipos.map(e => [e.id_equipo, e.nombre]));
-    const disciplinasMap = Object.fromEntries(disciplinas.map(d => [d.id_diciplinas, d.nombre]));
+
+    // Diccionario de disciplinas con categoría incluida
+    const disciplinasMap = Object.fromEntries(
+      disciplinas.map(d => [
+        d.id_diciplinas,
+        `${d.nombre} (${d.categoria})` // Combina nombre y categoría
+      ])
+    );
 
     renderCalendar(rolData, equiposMap, disciplinasMap);
   } catch (error) {
@@ -243,42 +249,43 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function renderCalendar(games, equiposMap, disciplinasMap) {
-  if (!Array.isArray(games)) {
-    calendarDiv.innerHTML = "<p>Formato de datos incorrecto.</p>";
-    return;
-  }
+    if (!Array.isArray(games)) {
+      calendarDiv.innerHTML = "<p>Formato de datos incorrecto.</p>";
+      return;
+    }
 
-  if (games.length === 0) {
-    calendarDiv.innerHTML = "<p>No hay partidos programados.</p>";
-    return;
-  }
+    if (games.length === 0) {
+      calendarDiv.innerHTML = "<p>No hay partidos programados.</p>";
+      return;
+    }
 
-  const table = document.createElement("table");
-  table.innerHTML = `
-    <thead>
-      <tr>
-        <th>Fecha</th>
-        <th>Hora</th>
-        <th>Disciplina</th>
-        <th>Equipo Local</th>
-        <th>Equipo Visitante</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${games.map(game => `
+    const table = document.createElement("table");
+    table.innerHTML = `
+      <thead>
         <tr>
-          <td>${game.fecha}</td>
-          <td>${game.hora}</td>
-          <td>${disciplinasMap[game.disciplinaid] || "Desconocida"}</td>
-          <td>${equiposMap[game.equipoLocalid] || "Desconocido"}</td>
-          <td>${equiposMap[game.equipoVisitid] || "Desconocido"}</td>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Disciplina</th>
+          <th>Equipo Local</th>
+          <th>Equipo Visitante</th>
         </tr>
-      `).join("")}
-    </tbody>
-  `;
-  calendarDiv.appendChild(table);
+      </thead>
+      <tbody>
+        ${games.map(game => `
+          <tr>
+            <td>${game.fecha}</td>
+            <td>${game.hora}</td>
+            <td>${disciplinasMap[game.disciplinaid] || "Desconocida"}</td>
+            <td>${equiposMap[game.equipoLocalid] || "Desconocido"}</td>
+            <td>${equiposMap[game.equipoVisitid] || "Desconocido"}</td>
+          </tr>
+        `).join("")}
+      </tbody>
+    `;
+    calendarDiv.appendChild(table);
   }
 });
 </script>
+
 
 </body>
