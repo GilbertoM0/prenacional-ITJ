@@ -511,7 +511,19 @@ section h1::after {
   transition: all 0.3s ease;
 }
 
+/* ===== Striping filas pares ===== */
+.calendar tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+/* Columnas separadas solo en tbody */
+.calendar tbody td {
+  border-right: 1px solid #eee;
+}
 
+/* Quitar línea derecha en la última columna */
+.calendar tbody tr td:last-child {
+  border-right: none;
+}
 
 
 
