@@ -346,44 +346,85 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function renderCalendar(games, equiposMap, disciplinasMap) {
-    calendarDiv.querySelectorAll("table").forEach(table => table.remove());
+  calendarDiv.querySelectorAll("table").forEach(table => table.remove());
 
-    if (!Array.isArray(games)) {
-      calendarDiv.innerHTML += "<p>Formato de datos incorrecto.</p>";
-      return;
-    }
+  if (!Array.isArray(games)) {
+    calendarDiv.innerHTML += "<p>Formato de datos incorrecto.</p>";
+    return;
+  }
 
-    if (games.length === 0) {
-      calendarDiv.innerHTML += "<p>No hay partidos programados.</p>";
-      return;
-    }
+  if (games.length === 0) {
+    calendarDiv.innerHTML += "<p>No hay partidos programados.</p>";
+    return;
+  }
 
-    const table = document.createElement("table");
-    table.innerHTML = `
-      <thead>
-        <tr>
-          <th>Fecha</th>
-          <th>Hora</th>
-          <th>Disciplina</th>
-          <th>Equipo Local</th>
-          <th>Equipo Visitante</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${games.map(game => `
+  // Mapa manual por id_RolDeJuegos
+  const canchaMap = {
+    1: "Cancha Principal",
+    2: "Campo Tec",
+    3: "Campo Tec",
+    4: "Campo Tec",
+    5: "Campo 1 U. Dep",
+    6: "Campo 2 U. Dep",
+    7: "Campo 1 U. Dep",
+    8: "Campo 1 U. Dep",
+    9: "Campo 1 U. Dep",
+    10: "Campo 2 U. Dep",
+    11: "Campo 1 U. Dep",
+    12: "Campo 2 U. Dep",
+    13: "Campo 1 U. Dep",
+    14: "Auditorio Tec",
+    15: "Auditorio Tec",
+    16: "Auditorio Tec",
+    17: "ddddddddddddddd",
+    18: "Auditorio Tec",
+    19: "Auditorio Tec",
+    20: "Auditorio Tec",
+    21: "Auditorio Tec",
+    22: "Auditorio Tec",
+    23: "Auditorio Tec",
+    24: "Auditorio Tec",
+    // Agrega todos los ids necesarios
+  };
+
+  const table = document.createElement("table");
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Disciplina</th>
+        <th>Equipo Local</th>
+        <th>Equipo Visitante</th>
+        <th>Cancha</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${games.map(game => {
+        const local = equiposMap[game.equipoLocalid] || "Desconocido";
+        const visitante = equiposMap[game.equipoVisitid] || "Desconocido";
+        const cancha = canchaMap[game.id_RolDeJuegos] || "Por asignar";
+
+        return `
           <tr>
             <td>${game.fecha}</td>
             <td>${game.hora}</td>
             <td>${disciplinasMap[game.disciplinaid] || "Desconocida"}</td>
-            <td>${equiposMap[game.equipoLocalid] || "Desconocido"}</td>
-            <td>${equiposMap[game.equipoVisitid] || "Desconocido"}</td>
+            <td>${local}</td>
+            <td>${visitante}</td>
+            <td>${cancha}</td>
           </tr>
-        `).join("")}
-      </tbody>
-    `;
+        `;
+      }).join("")}
+    </tbody>
+  `;
 
-    calendarDiv.appendChild(table);
-  }
+  calendarDiv.appendChild(table);
+}
+
+
+
+
 });
 </script>
 
