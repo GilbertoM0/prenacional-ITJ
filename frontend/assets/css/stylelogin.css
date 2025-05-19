@@ -430,3 +430,87 @@ ul { list-style: none; }
 }
 
 .falco img { width: 100%; }
+
+/* Add these media queries at the end of your existing CSS file */
+
+/* For screens below 1200px */
+@media screen and (max-width: 1200px) {
+  .screen {
+    padding: 40px 0;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .login-box {
+    width: 100%;
+  }
+  
+  /* Hide the falcon image on medium screens and below */
+  .falco {
+    display: none;
+  }
+}
+
+/* For screens below 768px (tablets and mobile) */
+@media screen and (max-width: 768px) {
+  .screen {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  .login-box {
+    padding: 30px 20px;
+  }
+  
+  .input-box {
+    margin-bottom: 20px;
+  }
+}
+
+/* For very small screens */
+@media screen and (max-width: 480px) {
+  .container {
+    width: 95%;
+  }
+  
+  .login-box h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  
+  .input-box {
+    margin-bottom: 15px;
+  }
+  
+  .btns {
+    padding: 8px 15px;
+  }
+}
+
+/* Fix for the navigation menu on small screens */
+@media screen and (max-width: 768px) {
+  .navigation {
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+  .navigation li {
+    margin: 5px 0;
+  }
+  
+  .preLogo {
+    max-width: 150px;
+  }
+}
