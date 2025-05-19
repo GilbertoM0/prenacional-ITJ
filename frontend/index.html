@@ -288,7 +288,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     disciplinasMap = Object.fromEntries(
       disciplinas.map(d => [
         d.id_diciplinas,
-        `${d.nombre} (${d.categoria})`
+        `${d.nombre} ${d.categoria}`
       ])
     );
 
