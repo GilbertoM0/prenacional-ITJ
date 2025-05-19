@@ -480,20 +480,20 @@ section h1::after {
 .calendar td {
   padding: 15px 10px;
   text-align: center;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #3c3feaf2;
   transition: background-color 0.3s ease, transform 0.2s ease;
   cursor: default;
 }
 
 /* Animación al pasar el cursor por celdas (menos header) */
-.calendar tbody td:hover {
+/* .calendar tbody td:hover {
   background-color: #f5f3ff;
   color: #4a3aff;
   transform: scale(1.05);
   box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
   border-radius: 6px;
   cursor: pointer;
-}
+} */
 
 /* Días actuales destacados */
 .calendar tbody td.today {
@@ -513,7 +513,7 @@ section h1::after {
 
 /* ===== Striping filas pares ===== */
 .calendar tbody tr:nth-child(even) {
-  background-color: #fafafa;
+  background-color: #a3c1f157;
 }
 /* Columnas separadas solo en tbody */
 .calendar tbody td {
@@ -819,7 +819,7 @@ section h1::after {
 /* CALENDAR  */
 .calendar {
     width: 100vw;
-    font-size: 0.85rem;
+    font-size: 0.70rem;
     margin: 0;
     border-radius: 0;
     box-shadow: none;

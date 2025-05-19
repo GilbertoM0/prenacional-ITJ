@@ -219,46 +219,156 @@
     <script>
 document.addEventListener("DOMContentLoaded", async () => {
   const calendarDiv = document.querySelector(".calendar");
-
+  
+  // Agrega botones de ordenación
+  const buttonsDiv = document.createElement("div");
+  buttonsDiv.className = "sort-buttons";
+  buttonsDiv.innerHTML = `
+    <button id="sortAscending" class="sort-btn">Ordenar por Fecha ↑</button>
+    <button id="sortDescending" class="sort-btn">Ordenar por Fecha ↓</button>
+  `;
+  buttonsDiv.style.marginBottom = "15px";
+  
+  // Estilo para botones
+  const style = document.createElement("style");
+  style.textContent = `
+    .sort-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    .sort-btn:hover {
+      background-color: #45a049;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+     
+      cursor: pointer;
+    }
+    th:hover {
+      background-color: #ddd;
+    }
+  `;
+  document.head.appendChild(style);
+  calendarDiv.appendChild(buttonsDiv);
+  
+  // Variable para almacenar los datos
+  let gamesData = [];
+  let equiposMap = {};
+  let disciplinasMap = {};
+  
   try {
     const [rolRes, equiposRes, disciplinasRes] = await Promise.all([
       fetch("https://back-prenacional-production.up.railway.app/api/rolDeJuegos"),
       fetch("https://back-prenacional-production.up.railway.app/api/equipo"),
       fetch("https://back-prenacional-production.up.railway.app/api/disciplinas"),
     ]);
-
-    const rolData = await rolRes.json();
+    
+    gamesData = await rolRes.json();
     const equipos = await equiposRes.json();
     const disciplinas = await disciplinasRes.json();
-
+    
     // Diccionario de equipos
-    const equiposMap = Object.fromEntries(equipos.map(e => [e.id_equipo, e.nombre]));
-
+    equiposMap = Object.fromEntries(equipos.map(e => [e.id_equipo, e.nombre]));
+    
     // Diccionario de disciplinas con categoría incluida
-    const disciplinasMap = Object.fromEntries(
+    disciplinasMap = Object.fromEntries(
       disciplinas.map(d => [
         d.id_diciplinas,
         `${d.nombre} (${d.categoria})` // Combina nombre y categoría
       ])
     );
-
-    renderCalendar(rolData, equiposMap, disciplinasMap);
+    
+    // Renderiza el calendario con los datos originales
+    renderCalendar(gamesData, equiposMap, disciplinasMap);
+    
+    // Agrega eventos a los botones
+    document.getElementById("sortAscending").addEventListener("click", () => {
+      const sortedGames = sortGamesByDate(gamesData, 'asc');
+      renderCalendar(sortedGames, equiposMap, disciplinasMap);
+    });
+    
+    document.getElementById("sortDescending").addEventListener("click", () => {
+      const sortedGames = sortGamesByDate(gamesData, 'desc');
+      renderCalendar(sortedGames, equiposMap, disciplinasMap);
+    });
+    
   } catch (error) {
     console.error("Error al cargar datos:", error);
     calendarDiv.innerHTML = "<p>Error al cargar el rol de juegos.</p>";
   }
-
+  
+  // Función para convertir fecha en formato DD/MM/AAAA a objeto Date
+  function convertToDate(dateStr) {
+    // Verificamos el formato de la fecha
+    if (!dateStr) return new Date(0); // Fecha por defecto si es nula
+    
+    // Asumimos formato DD/MM/AAAA
+    const parts = dateStr.split('/');
+    if (parts.length === 3) {
+      // En formato DD/MM/AAAA
+      return new Date(parts[2], parts[1] - 1, parts[0]);
+    } else {
+      // Intenta con formato AAAA-MM-DD
+      return new Date(dateStr);
+    }
+  }
+  
+  // Función para ordenar juegos por fecha
+  function sortGamesByDate(games, order = 'asc') {
+    return [...games].sort((a, b) => {
+      const dateA = convertToDate(a.fecha);
+      const dateB = convertToDate(b.fecha);
+      
+      // Si las fechas son iguales, ordenar por hora
+      if (dateA.getTime() === dateB.getTime()) {
+        // Convertir horas a un formato comparable
+        const timeA = a.hora ? a.hora.split(':') : ['00', '00'];
+        const timeB = b.hora ? b.hora.split(':') : ['00', '00'];
+        
+        const hourA = parseInt(timeA[0]);
+        const hourB = parseInt(timeB[0]);
+        
+        if (hourA !== hourB) {
+          return order === 'asc' ? hourA - hourB : hourB - hourA;
+        }
+        
+        const minuteA = parseInt(timeA[1]);
+        const minuteB = parseInt(timeB[1]);
+        
+        return order === 'asc' ? minuteA - minuteB : minuteB - minuteA;
+      }
+      
+      return order === 'asc' ? dateA - dateB : dateB - dateA;
+    });
+  }
+  
   function renderCalendar(games, equiposMap, disciplinasMap) {
+    // Limpia el contenido actual
+    calendarDiv.querySelectorAll("table").forEach(table => table.remove());
+    
     if (!Array.isArray(games)) {
-      calendarDiv.innerHTML = "<p>Formato de datos incorrecto.</p>";
+      calendarDiv.innerHTML += "<p>Formato de datos incorrecto.</p>";
       return;
     }
-
+    
     if (games.length === 0) {
-      calendarDiv.innerHTML = "<p>No hay partidos programados.</p>";
+      calendarDiv.innerHTML += "<p>No hay partidos programados.</p>";
       return;
     }
-
+    
     const table = document.createElement("table");
     table.innerHTML = `
       <thead>
@@ -282,6 +392,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         `).join("")}
       </tbody>
     `;
+    
     calendarDiv.appendChild(table);
   }
 });
