@@ -306,7 +306,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   } catch (error) {
     console.error("Error al cargar datos:", error);
-    calendarDiv.innerHTML = "<p>Error al cargar el rol de juegos.</p>";
+    calendarDiv.innerHTML = "<p>Tenemos muchas peticiones, estamos trabajando en eso, gracias por usar la pagina :).</p>";
   }
 
   function convertToDate(dateStr) {
@@ -349,12 +349,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   calendarDiv.querySelectorAll("table").forEach(table => table.remove());
 
   if (!Array.isArray(games)) {
-    calendarDiv.innerHTML += "<p>Formato de datos incorrecto.</p>";
+    calendarDiv.innerHTML += "<p>Tenemos muchas peticiones, estamos trabajando en eso, gracias por usar la pagina :).</p>";
     return;
   }
 
   if (games.length === 0) {
-    calendarDiv.innerHTML += "<p>No hay partidos programados.</p>";
+    calendarDiv.innerHTML += "<p>Tenemos muchas peticiones, estamos trabajando en eso, gracias por usar la pagina :).</p>";
     return;
   }
 
@@ -373,17 +373,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     11: "Campo 1 U. Dep",
     12: "Campo 2 U. Dep",
     13: "Campo 1 U. Dep",
-    14: "Auditorio Tec",
-    15: "Auditorio Tec",
-    16: "Auditorio Tec",
+    14: "Audi Tec",
+    15: "Audi Tec",
+    16: "Audi Tec",
     17: "ddddddddddddddd",
-    18: "Auditorio Tec",
-    19: "Auditorio Tec",
-    20: "Auditorio Tec",
-    21: "Auditorio Tec",
-    22: "Auditorio Tec",
-    23: "Auditorio Tec",
-    24: "Auditorio Tec",
+    18: "Audi Tec",
+    19: "Audi Tec",
+    20: "Audi Tec",
+    21: "Audi Tec",
+    22: "Audi Tec",
+    23: "Audi Tec",
+    24: "Audi Tec",
     // Agrega todos los ids necesarios
   };
 
