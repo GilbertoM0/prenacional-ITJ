@@ -3,26 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRENACIONAL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>PRENACIONAL</title>
     <link rel="icon" href="./assets/images/LogoPre.ico">
-    <!-- ====== CSS Files ====== -->    <link rel="stylesheet" href="./assets/css/stylelogin.css">
+    <!-- ====== CSS Files ====== -->
+    <link rel="stylesheet" href="./assets/css/stylelogin.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
 </head>
 
-<body>  <header>
-        <ul class="navigation" ">
-            <li><a href="./index.html"><ioicon name="home-sharp"></ion-icon>INICIO</a></li>
+<body>
+  <header>
+    <ul class="navigation">
+      <li><a href="./index.html"><ion-icon name="home-sharp"></ion-icon>INICIO</a></li>
 
-            <li>
-                <a href="#">DISCIPLINAS<ion-icon name="caret-down"></ion-icon></a>
-                <ul class="subdiscipline"></ul>
-            </li>
+      <li>
+          <a href="#">DISCIPLINAS<ion-icon name="caret-down"></ion-icon></a>
+          <ul class="subdiscipline"></ul>
+      </li>
 
-            <li><img src="./assets/images/Logo Prenacional.webp" alt="logo" class="preLogo"></li>
+      <li><img src="./assets/images/Logo Prenacional.webp" alt="logo" class="preLogo"></li>
 
-            <li class="login"><a href="login.html">LOGIN<ion-icon name="person-circle-sharp"></ion-icon></a></li>
-        </ul>
-    </header>
+      <li class="login"><a href="login.html">LOGIN<ion-icon name="person-circle-sharp"></ion-icon></a></li>
+    </ul>
+  </header>
 
   <!-- ================================= INICIO SESIÓN ================================= -->
   <div class="screen">
@@ -74,22 +76,11 @@
 
     <!-- ====== Iconos ====== -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <!-- ====== Alertas ====== -->
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>    <!-- ====== Alertas ====== -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <!-- ====== Variables Globales ====== -->
-    <script src="assets/js/globalVariables.js"></script>
-    <!-- ====== API Disciplinas ====== -->
-    <script src="assets/js/api/disciplinas.js"></script>
-    <!-- ====== API CLASIFICACION ====== -->
-    <script src="assets/js/api/clasificacion.js"></script>
-    <!-- ====== API CANCHA ====== -->
-    <script src="assets/js/api/cancha.js"></script>
-    <!-- ====== API JUGADORES ====== -->
-    <script src="assets/js/api/jugadores.js"></script>
-    <!-- ====== API ROLES ====== -->
-    <script src="assets/js/api/roles.js"></script>
-    <!-- ====== Funcionalidad ====== -->    <script src="assets/js/login.js"></script>
+    <!-- ====== Funcionalidad ====== -->
+    <script src="assets/js/login.js"></script>
+    <script src="assets/js/conection.js"></script>
 </body>
 </html>

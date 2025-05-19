@@ -115,7 +115,7 @@
 
             <div class="emerPhones">                                
                 <div class="phones">
-                    <img src="/frontend/assets/images/Telefono.webp" alt="Phone">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000F5"><path d="M240-400q0 52 21 98.5t60 81.5q-1-5-1-9v-9q0-32 12-60t35-51l113-111 113 111q23 23 35 51t12 60v9q0 4-1 9 39-35 60-81.5t21-98.5q0-50-18.5-94.5T648-574q-20 13-42 19.5t-45 6.5q-62 0-107.5-41T401-690q-39 33-69 68.5t-50.5 72Q261-513 250.5-475T240-400Zm240 52-57 56q-11 11-17 25t-6 29q0 32 23.5 55t56.5 23q33 0 56.5-23t23.5-55q0-16-6-29.5T537-292l-57-56Zm0-492v132q0 34 23.5 57t57.5 23q18 0 33.5-7.5T622-658l18-22q74 42 117 117t43 163q0 134-93 227T480-80q-134 0-227-93t-93-227q0-129 86.5-245T480-840Z"/></svg>
 
                     <div class="phoneText">
                         <p class="phonePeople">BOMBEROS Y PROTECCIÓN CIVIL</p>
@@ -219,17 +219,18 @@
     <script>
 document.addEventListener("DOMContentLoaded", async () => {
   const calendarDiv = document.querySelector(".calendar");
-  
-  // Agrega botones de ordenación
+
+  // Agrega botones de ordenación con margen superior
   const buttonsDiv = document.createElement("div");
   buttonsDiv.className = "sort-buttons";
   buttonsDiv.innerHTML = `
     <button id="sortAscending" class="sort-btn">Ordenar por Fecha ↑</button>
     <button id="sortDescending" class="sort-btn">Ordenar por Fecha ↓</button>
   `;
+  buttonsDiv.style.marginTop = "30px"; // <<< Margen para separarlos del contenido superior
   buttonsDiv.style.marginBottom = "15px";
-  
-  // Estilo para botones
+
+  // Estilo para botones y tabla
   const style = document.createElement("style");
   style.textContent = `
     .sort-btn {
@@ -254,7 +255,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       text-align: left;
     }
     th {
-     
       cursor: pointer;
     }
     th:hover {
@@ -263,112 +263,96 @@ document.addEventListener("DOMContentLoaded", async () => {
   `;
   document.head.appendChild(style);
   calendarDiv.appendChild(buttonsDiv);
-  
-  // Variable para almacenar los datos
+
   let gamesData = [];
   let equiposMap = {};
   let disciplinasMap = {};
-  
+
   try {
     const [rolRes, equiposRes, disciplinasRes] = await Promise.all([
       fetch("https://back-prenacional-production.up.railway.app/api/rolDeJuegos"),
       fetch("https://back-prenacional-production.up.railway.app/api/equipo"),
       fetch("https://back-prenacional-production.up.railway.app/api/disciplinas"),
     ]);
-    
+
     gamesData = await rolRes.json();
     const equipos = await equiposRes.json();
     const disciplinas = await disciplinasRes.json();
-    
-    // Diccionario de equipos
+
     equiposMap = Object.fromEntries(equipos.map(e => [e.id_equipo, e.nombre]));
-    
-    // Diccionario de disciplinas con categoría incluida
     disciplinasMap = Object.fromEntries(
       disciplinas.map(d => [
         d.id_diciplinas,
-        `${d.nombre} (${d.categoria})` // Combina nombre y categoría
+        `${d.nombre} (${d.categoria})`
       ])
     );
-    
-    // Renderiza el calendario con los datos originales
+
     renderCalendar(gamesData, equiposMap, disciplinasMap);
-    
-    // Agrega eventos a los botones
+
     document.getElementById("sortAscending").addEventListener("click", () => {
       const sortedGames = sortGamesByDate(gamesData, 'asc');
       renderCalendar(sortedGames, equiposMap, disciplinasMap);
     });
-    
+
     document.getElementById("sortDescending").addEventListener("click", () => {
       const sortedGames = sortGamesByDate(gamesData, 'desc');
       renderCalendar(sortedGames, equiposMap, disciplinasMap);
     });
-    
+
   } catch (error) {
     console.error("Error al cargar datos:", error);
     calendarDiv.innerHTML = "<p>Error al cargar el rol de juegos.</p>";
   }
-  
-  // Función para convertir fecha en formato DD/MM/AAAA a objeto Date
+
   function convertToDate(dateStr) {
-    // Verificamos el formato de la fecha
-    if (!dateStr) return new Date(0); // Fecha por defecto si es nula
-    
-    // Asumimos formato DD/MM/AAAA
+    if (!dateStr) return new Date(0);
     const parts = dateStr.split('/');
     if (parts.length === 3) {
-      // En formato DD/MM/AAAA
       return new Date(parts[2], parts[1] - 1, parts[0]);
     } else {
-      // Intenta con formato AAAA-MM-DD
       return new Date(dateStr);
     }
   }
-  
-  // Función para ordenar juegos por fecha
+
   function sortGamesByDate(games, order = 'asc') {
     return [...games].sort((a, b) => {
       const dateA = convertToDate(a.fecha);
       const dateB = convertToDate(b.fecha);
-      
-      // Si las fechas son iguales, ordenar por hora
+
       if (dateA.getTime() === dateB.getTime()) {
-        // Convertir horas a un formato comparable
         const timeA = a.hora ? a.hora.split(':') : ['00', '00'];
         const timeB = b.hora ? b.hora.split(':') : ['00', '00'];
-        
+
         const hourA = parseInt(timeA[0]);
         const hourB = parseInt(timeB[0]);
-        
+
         if (hourA !== hourB) {
           return order === 'asc' ? hourA - hourB : hourB - hourA;
         }
-        
+
         const minuteA = parseInt(timeA[1]);
         const minuteB = parseInt(timeB[1]);
-        
+
         return order === 'asc' ? minuteA - minuteB : minuteB - minuteA;
       }
-      
+
       return order === 'asc' ? dateA - dateB : dateB - dateA;
     });
   }
-  
+
   function renderCalendar(games, equiposMap, disciplinasMap) {
-    // Limpia el contenido actual
     calendarDiv.querySelectorAll("table").forEach(table => table.remove());
-    
+
     if (!Array.isArray(games)) {
       calendarDiv.innerHTML += "<p>Formato de datos incorrecto.</p>";
       return;
     }
-    
+
     if (games.length === 0) {
       calendarDiv.innerHTML += "<p>No hay partidos programados.</p>";
       return;
     }
-    
+
     const table = document.createElement("table");
     table.innerHTML = `
       <thead>
@@ -392,11 +376,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         `).join("")}
       </tbody>
     `;
-    
+
     calendarDiv.appendChild(table);
   }
 });
 </script>
+
 
 
 </body>
