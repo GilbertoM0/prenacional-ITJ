@@ -1,5 +1,3 @@
-import { AttendanceService } from "./attendanceService.js";
-
 /* ============================= CARGA DE PÁGINA ============================= */
 let currentGroups = [];
 let currentTeams = [];
@@ -1194,7 +1192,7 @@ async function getPartidosByFase(fase) {
     try {
         const [partidos, roles] = await Promise.all([
             fetchPartidos(),
-            fetchRoldeJuegos()
+            fetchRoles() // FIX: was fetchRoldeJuegos
         ]);
         
         return partidos
@@ -1242,7 +1240,7 @@ async function getSedeById(canchaid) {
 async function getSedeByTitle() {
     try {
         const type = document.querySelector('.sedesTitles h3').textContent.trim().toUpperCase();
-        allSedes = await fetchSedes();
+        allSedes = await fetchCancha(); // FIX: was fetchSedes
 
         const typeMap = {
             'CANCHAS': 'CANCHA',
@@ -1279,8 +1277,8 @@ async function getPointsByTeam(equipoid) {
 
 async function getTeamById(equipoid) {
     try {
-        const team = await fetchEquipos();
-        return team.find(t => t.id_equipo === equipoid);
+        const teams = await fetchTeams(); // FIX: was fetchEquipos
+        return teams.find(t => t.id_equipo === equipoid);
     } catch(error) {
         console.log('Error obteniendo equipos: ', error);
         return null;
@@ -1289,7 +1287,7 @@ async function getTeamById(equipoid) {
 
 async function getLogoByTeam(tecsid) {
     try {
-        const tec = await fetchTecs();
+        const tec = await fetchTecs(); // FIX: was fetchTecs/fetchSedes
         return tec.find(t => t.id_tecs === tecsid);
     } catch(error) {
         console.error('Error obteniendo logo:', error);
@@ -1299,7 +1297,7 @@ async function getLogoByTeam(tecsid) {
 
 async function getTeamsByGroup(grupoid) {
     try {
-        const teams = await fetchEquipos();
+        const teams = await fetchTeams(); // FIX: was fetchEquipos
         return teams.filter(t => t.grupoid === grupoid);
     } catch (error) {
         console.error('Error obteniendo equipos:', error);
@@ -1346,3 +1344,32 @@ async function getImagenesCarousel() {
         console.error('Error cargando los tecs:', error);
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const navHamburger = document.getElementById('navHamburger');
+    const mainNav = document.getElementById('mainNav');
+    if (navHamburger && mainNav) {
+        navHamburger.addEventListener('click', function () {
+            mainNav.classList.toggle('open');
+        });
+        mainNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (window.innerWidth <= 900) {
+                    const parentLi = link.closest('li');
+                    if (!parentLi || !parentLi.querySelector('ul')) {
+                        mainNav.classList.remove('open');
+                    } else {
+                        e.preventDefault();
+                    }
+                }
+            });
+        });
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 900 && mainNav.classList.contains('open')) {
+                if (!mainNav.contains(e.target) && !navHamburger.contains(e.target)) {
+                    mainNav.classList.remove('open');
+                }
+            }
+        });
+    }
+});

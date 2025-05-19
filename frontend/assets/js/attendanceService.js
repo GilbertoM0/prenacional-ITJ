@@ -1,5 +1,5 @@
 // Servicio encapsulado para manejar la asistencia
-export const AttendanceService = (() => {
+window.AttendanceService = (() => {
     const STORAGE_KEY = 'attendance';
 
     // Métodos privados

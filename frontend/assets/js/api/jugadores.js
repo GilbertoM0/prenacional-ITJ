@@ -6,7 +6,7 @@
  */
 async function fetchPlayers() {
     try {
-        const response = await fetch(`${API_BASE_URL}/jugadores`);
+        const response = await fetch(`${API_BASE_URL}/jugador`);
         if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
     } catch (error) {

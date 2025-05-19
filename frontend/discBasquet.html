@@ -2,19 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PRENACIONAL</title>
     <link rel="icon" href="./assets/images/LogoPre.ico">
-    <!-- ====== CSS Files ====== -->
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- ====== CSS Files ====== -->    <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/responsive.css">
      
 </head>
 
-<body>
-    <header>
-        <ul class="navigation">
+<body>    <header>
+        <ul class="navigation" id="mainNav">
             <li><a href="./index.html"><ion-icon name="home-sharp"></ion-icon>INICIO</a></li>
             
             <li>
@@ -385,7 +382,23 @@
     <!-- ====== Iconos ====== -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- ====== Variables Globales ====== -->
+    <script src="assets/js/globalVariables.js"></script>
+    <!-- ====== API Disciplinas ====== -->
+    <script src="assets/js/api/disciplinas.js"></script>
+    <!-- ====== API TECS ====== -->
+    <script src="assets/js/api/tecs.js"></script>
+    <!-- ====== API GRUPOS ====== -->
+    <script src="assets/js/api/grupos.js"></script>
+    <script src="assets/js/api/equipos.js"></script>
+    <script src="assets/js/api/partidos.js"></script>
+    <script src="assets/js/api/clasificacion.js"></script>
+    <script src="assets/js/api/cancha.js"></script>
+    <script src="assets/js/api/jugadores.js"></script>
+    <script src="assets/js/api/roles.js"></script>
+    <!-- ====== Attendance Service ====== -->
+    <script src="assets/js/attendanceService.js"></script>
     <!-- ====== Funcionalidad ====== -->
-    <script type="module" src="./assets/js/conection.js"></script>
+    <script src="assets/js/conection.js"></script>
 </body>
 </html>

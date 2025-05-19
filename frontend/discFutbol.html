@@ -6,15 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PRENACIONAL</title>
     <link rel="icon" href="./assets/images/LogoPre.ico">
-    <!-- ====== CSS Files ====== -->
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- ====== CSS Files ====== -->    <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/responsive.css">
 
 </head>
 
-<body>
-    <header>
-        <ul class="navigation">
+<body>    <header>
+        <ul class="navigation" id="mainNav">
             <li><a href="./index.html"><ion-icon name="home-sharp"></ion-icon>INICIO</a></li>
             
             <li>
@@ -382,10 +380,17 @@
        </div>
     </div>
 
-    <!-- ====== Iconos ====== -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <!-- ====== Funcionalidad ====== -->
-    <script type="module" src="./assets/js/conection.js"></script>
+    <!-- ====== Iconos Ionic ====== -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+    <!-- ====== API Files ====== -->
+    <script src="./assets/js/api/clasificacion.js"></script>
+    <script src="./assets/js/api/cancha.js"></script>
+    <script src="./assets/js/api/jugadores.js"></script>
+    <script src="./assets/js/api/roles.js"></script>
+    
+    <!-- ====== Script Files ====== -->    <script src="./assets/js/globalVariables.js"></script>
+    <script src="./assets/js/conection.js"></script>
 </body>
 </html>

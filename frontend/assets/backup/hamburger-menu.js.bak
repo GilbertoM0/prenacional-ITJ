@@ -1,0 +1,112 @@
+/**
+ * Script para manejar la funcionalidad del menú hamburguesa
+ * Módulo independiente para mejor mantenibilidad
+ * SOLO afecta la experiencia móvil
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Referencias a los elementos
+    const navHamburger = document.getElementById('navHamburger');
+    const mainNav = document.getElementById('mainNav');
+    
+    // Verificar si estamos en modo móvil
+    const isMobile = window.innerWidth <= 900;
+
+    // En desktop, asegurar que no se aplican clases que afecten al menú
+    if (!isMobile && mainNav) {
+        mainNav.classList.remove('open');
+    }
+    
+    // Crear overlay para cierre del menú
+    const menuOverlay = document.createElement('div');
+    menuOverlay.className = 'menu-overlay';
+    document.body.appendChild(menuOverlay);
+    
+    if (navHamburger && mainNav) {
+        // Toggle del menú al hacer clic en hamburguesa
+        navHamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navHamburger.classList.toggle('active');
+            mainNav.classList.toggle('open');
+            menuOverlay.classList.toggle('show');
+            
+            // Bloquear scroll del body cuando el menú está abierto
+            if (mainNav.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Cerrar menú al hacer clic en el overlay
+        menuOverlay.addEventListener('click', function() {
+            closeMenu();
+        });
+        
+        // Manejar submenús
+        setupSubmenus();
+        
+        // Cerrar menú al hacer clic en links de navegación (excepto los que tienen submenú)
+        mainNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const parentLi = link.closest('li');
+                if (!parentLi || !parentLi.querySelector('ul')) {
+                    closeMenu();
+                } else if (window.innerWidth <= 900) {
+                    e.preventDefault();
+                    const submenu = parentLi.querySelector('ul');
+                    if (submenu) {
+                        // Toggle para mostrar/ocultar submenú
+                        parentLi.classList.toggle('active');
+                        
+                        // Si se abre este, cerrar otros submenús
+                        if (parentLi.classList.contains('active')) {
+                            const siblings = Array.from(parentLi.parentNode.children).filter(el => el !== parentLi);
+                            siblings.forEach(sibling => {
+                                sibling.classList.remove('active');
+                            });
+                        }
+                    }
+                }
+            });
+        });
+        
+        // Cerrar menú en cambio de orientación/resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 900) {
+                closeMenu();
+            }
+        });
+        
+        // ESC para cerrar menú
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mainNav.classList.contains('open')) {
+                closeMenu();
+            }
+        });
+    }
+    
+    // Función para cerrar el menú
+    function closeMenu() {
+        if (navHamburger && mainNav) {
+            navHamburger.classList.remove('active');
+            mainNav.classList.remove('open');
+            menuOverlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+    }
+    
+    // Configurar submenús
+    function setupSubmenus() {
+        // IMPORTANTE: En desktop, dejamos que el CSS nativo maneje los hover
+        // Solo configuramos eventos para móvil
+        if (window.innerWidth <= 900) {
+            const hasSubmenu = document.querySelectorAll('li:has(ul)');
+            
+            hasSubmenu.forEach(item => {
+                // Los eventos solo se aplican en modo móvil
+                // El hover en desktop lo maneja el CSS nativo sin JS
+            });
+        }
+    }
+});
