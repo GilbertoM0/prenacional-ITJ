@@ -1,0 +1,118 @@
+/* Team cards container */
+.team-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  margin-top: 20px;
+  /* max-height: 600px;
+  overflow-y: auto; */
+  padding-right: 10px; /* Add some padding for the scrollbar */
+}
+
+/* Desktop view */
+@media screen and (min-width: 769px) {
+  .team-cards-container {
+    display: none; /* Hide cards in desktop view */
+  }
+}
+
+/* Mobile team card styles */
+@media screen and (max-width: 768px) {
+  /* Show cards container, hide original table */
+  .team-cards-container {
+    display: flex;
+  }
+  
+  /* Hide original desktop presentation */
+  .sections.teams:not(.titlePoints) {
+    display: none;
+  }
+  /* Container for all team cards */
+  .points {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+  
+  /* Individual team card */
+  .equipo-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 24px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  /* Team header with logo and name */
+  .equipo-card .team-header {
+    display: flex;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 16px 0 12px 0 !important;
+    background: #f5f7fa;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  /* Team logo styling */
+  .equipo-card .teamLogos {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 4px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+  }
+  
+  /* Team name styling */
+  .equipo-card .tec {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #222;
+    text-align: center;
+    margin: 0;
+  }
+  
+  /* Table styling */
+  .equipo-card .numberPoints-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+    background: #f0f4fa;
+  }
+  
+  /* Table cells styling */
+  .equipo-card .numberPoints-table th,
+  .equipo-card .numberPoints-table td {
+    text-align: center;
+    padding: 8px 4px;
+    font-size: 0.95em;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  /* Table header styling */
+  .equipo-card .numberPoints-table th {
+    background: #e3eaf6;
+    font-weight: 700;
+    color: #294B7D;
+    font-size: 1em;
+  }
+  
+  /* Remove border from last row */
+  .equipo-card .numberPoints-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  /* Hide the main table headers as each card has its own */
+  .grid-header {
+    display: none;
+  }
+}
