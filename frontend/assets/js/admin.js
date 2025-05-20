@@ -35,32 +35,3 @@ if (reloadGroupsBtn) {
     reloadGroupsBtn.addEventListener('click', () => renderGroupOptions('groupS'));
 }
 
-// ========== HAMBURGER MENU LOGIC FOR ADMIN PAGES ========== //
-document.addEventListener('DOMContentLoaded', function () {
-    const navHamburger = document.getElementById('navHamburger');
-    const mainNav = document.getElementById('mainNav');
-    if (navHamburger && mainNav) {
-        navHamburger.addEventListener('click', function () {
-            mainNav.classList.toggle('open');
-        });
-        mainNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                if (window.innerWidth <= 900) {
-                    const parentLi = link.closest('li');
-                    if (!parentLi || !parentLi.querySelector('ul')) {
-                        mainNav.classList.remove('open');
-                    } else {
-                        e.preventDefault();
-                    }
-                }
-            });
-        });
-        document.addEventListener('click', function(e) {
-            if (window.innerWidth <= 900 && mainNav.classList.contains('open')) {
-                if (!mainNav.contains(e.target) && !navHamburger.contains(e.target)) {
-                    mainNav.classList.remove('open');
-                }
-            }
-        });
-    }
-});
