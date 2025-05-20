@@ -405,14 +405,67 @@ function resetAnimations() {
 }
 
 /* =================== NAVEGACIÓN DE EQUIPOS =================== */
+// Renderiza una tarjeta de equipo con logo y tabla de puntos única
+function renderTeamCard(team, logo, point) {
+    return `
+      <div class="equipo-card">
+        <div class="team-header">
+          <img src="${logo.logo}" alt="${logo.ciudad}" class="teamLogos">
+          <span class="tec">${team.nombre ? team.nombre : logo.ciudad}</span>
+        </div>
+        <table class="numberPoints-table">
+          <thead>
+            <tr>
+              <th>JJ</th>
+              <th>JG</th>
+              <th>JP</th>
+              <th>PF</th>
+              <th>PC</th>
+              <th>DP</th>
+              <th>PTS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>${point.partidosJugados ?? ''}</td>
+              <td>${point.partidosGanados ?? ''}</td>
+              <td>${point.partidosPerdidos ?? ''}</td>
+              <td>${point.puntosAFavor ?? ''}</td>
+              <td>${point.puntosEnContra ?? ''}</td>
+              <td>${point.diferenciaPuntos ?? ''}</td>
+              <td>${point.puntosTotales ?? ''}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+}
+
 async function renderTeams(teams) {
     const container = document.querySelector('.points');    
     
-    // Limpiar contenido existente
+    // Limpiar contenido existente, pero mantener el encabezado de tabla si existe
     const existingTeams = container.querySelectorAll('.sections.teams:not(.titlePoints)');
     existingTeams.forEach(team => team.remove());
 
-    for(const team of teams) {
+    // Verificar si ya existe el contenedor de tarjetas de equipos
+    let cardsContainer = container.querySelector('.team-cards-container');
+    if (!cardsContainer) {
+        cardsContainer = document.createElement('div');
+        cardsContainer.className = 'team-cards-container';
+        container.appendChild(cardsContainer);
+    } else {
+        cardsContainer.innerHTML = ''; // Limpiar las tarjetas existentes
+    }
+
+    // En vista móvil, ocultar el encabezado general de la tabla
+    if (window.innerWidth <= 768) {
+        const gridHeader = document.querySelector('.grid-header');
+        if (gridHeader) gridHeader.style.display = 'none';
+    }
+
+    // Renderizar cada equipo como una tarjeta
+    for (const team of teams) {
         const logos = await getLogoByTeam(team.tecsid);
         const logo = logos || {};
 
@@ -422,40 +475,50 @@ async function renderTeams(teams) {
         const ciudad = logo.ciudad;
         let rutaLogo = logo.logo;
 
-        if(ciudad === 'Puruándiro')
-            rutaLogo = './assets/images/Puruándiro.webp'
-        else if(ciudad === 'Purhépecha')
-            rutaLogo = './assets/images/Purhépecha.webp'
+        if (ciudad === 'Puruándiro')
+            rutaLogo = './assets/images/Puruándiro.webp';
+        else if (ciudad === 'Purhépecha')
+            rutaLogo = './assets/images/Purhépecha.webp';
 
-        const teamHTML = `
-            <div class="sections teams">
-                <div class="team">
-                    <div class="teamImg">
-                        <img src="${rutaLogo}" alt="${ciudad}" class="teamLogos">
-                    </div>                    
-                    <p class="tec">${team.nombre ? team.nombre : logo.ciudad}</p>
-                </div>
+        // Actualizar logo
+        logo.logo = rutaLogo;
 
-                <div class="numberPoints">
-                    <div>${point.partidosJugados ?? ''}</div>
-                    <div>${point.partidosGanados ?? ''}</div>
-                    <div>${point.partidosPerdidos ?? ''}</div>
-                    <div>${point.puntosAFavor ?? ''}</div>
-                    <div>${point.puntosEnContra ?? ''}</div>
-                    <div>${point.diferenciaPuntos ?? ''}</div>
-                    <div class="pts">${point.puntosTotales ?? ''}</div>
-                </div>
+        // Usar la nueva función de tarjeta de equipo
+        cardsContainer.insertAdjacentHTML('beforeend', renderTeamCard(team, logo, point));
+
+        // Para compatibilidad con vista de escritorio, también agregar formato tradicional
+        if (window.innerWidth > 768) {
+            const teamHTML = `
+                <div class="sections teams">
+                    <div class="team">
+                        <div class="teamImg">
+                            <img src="${rutaLogo}" alt="${ciudad}" class="teamLogos">
+                        </div>                    
+                        <p class="tec">${team.nombre ? team.nombre : logo.ciudad}</p>
+                    </div>
+
+                    <div class="numberPoints">
+                        <div>${point.partidosJugados ?? ''}</div>
+                        <div>${point.partidosGanados ?? ''}</div>
+                        <div>${point.partidosPerdidos ?? ''}</div>
+                        <div>${point.puntosAFavor ?? ''}</div>
+                        <div>${point.puntosEnContra ?? ''}</div>
+                        <div>${point.diferenciaPuntos ?? ''}</div>
+                        <div class="pts">${point.puntosTotales ?? ''}</div>                </div>
             </div>
-        `;
-        container.insertAdjacentHTML('beforeend', teamHTML);
-    };
+            `;
+            container.insertAdjacentHTML('beforeend', teamHTML);
+        }
+    }
 
-    // Añadir filas vacías si hay menos de 4 equipos
-    const remainingSlots = 4 - teams.length;
-    for(let i = 0; i < remainingSlots; i++)
-        container.insertAdjacentHTML('beforeend', 
-            '<div class="sections teams"></div>'
-        );
+    // Añadir filas vacías si hay menos de 4 equipos (solo para vista de escritorio)
+    if (window.innerWidth > 768) {
+        const remainingSlots = 4 - teams.length;
+        for(let i = 0; i < remainingSlots; i++)
+            container.insertAdjacentHTML('beforeend', 
+                '<div class="sections teams"></div>'
+            );
+    }
 
     // Quitar última línea
     const allPts = container.querySelectorAll('.pts');

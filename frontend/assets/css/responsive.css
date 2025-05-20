@@ -84,6 +84,13 @@
 
 /* Mobile (<= 768px) */
 @media screen and (max-width: 768px) {
+
+    .container-tabla{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+    }
     header {
         height: auto;
     }
@@ -400,4 +407,147 @@
     .list{
         height: 0px;
     }
-}
+
+    .equipo-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 20px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px #0001;
+        padding: 10px 0;
+    }
+    .equipo-card .teamImg {
+        margin-bottom: 10px;
+    }
+    .equipo-card .teamLogos {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+    }
+    .equipo-card .tec {
+        font-size: 1.1em;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+    .equipo-card .numberPoints {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 1em;
+        margin-top: 5px;
+    }
+
+  .points {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+  .equipo-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 0 0 10px 0;
+    overflow: hidden;
+  }
+  .equipo-card .team-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 10px;
+    background: #f5f7fa;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .equipo-card .teamLogos {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+  }
+  .equipo-card .tec {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #222;
+    text-align: left;
+    margin: 0;
+  }
+  .equipo-card .numberPoints-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+    background: #f0f4fa;
+  }
+  .equipo-card .numberPoints-table th,
+  .equipo-card .numberPoints-table td {
+    text-align: center;
+    padding: 6px 2px;
+    font-size: 0.98em;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .equipo-card .numberPoints-table th {
+    background: #e3eaf6;
+    font-weight: 700;
+    color: #294B7D;
+    font-size: 1em;
+  }
+  .equipo-card .numberPoints-table tr:last-child td {
+    border-bottom: none;
+  }
+  @media screen and (max-width: 768px) {
+  .equipo-card .team-header {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 14px 0 8px 0 !important;
+    background: #f5f7fa;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .equipo-card .teamLogos {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    margin-bottom: 4px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+  }
+  .equipo-card .tec {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #222;
+    text-align: center;
+    margin: 0;
+  }
+  .equipo-card .numberPoints-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+    background: #f0f4fa;
+  }
+  .equipo-card .numberPoints-table th,
+  .equipo-card .numberPoints-table td {
+    text-align: center;
+    padding: 6px 2px;
+    font-size: 0.98em;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .equipo-card .numberPoints-table th {
+    background: #e3eaf6;
+    font-weight: 700;
+    color: #294B7D;
+    font-size: 1em;
+  }  .equipo-card .numberPoints-table tr:last-child td {
+    border-bottom: none;
+  }
+}}
