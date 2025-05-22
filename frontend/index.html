@@ -306,7 +306,95 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   } catch (error) {
     console.error("Error al cargar datos:", error);
-    calendarDiv.innerHTML = "<p>Tenemos muchas peticiones, estamos trabajando en eso, gracias por usar la pagina :).</p>";
+    // Datos de respaldo en caso de error
+     calendarDiv.innerHTML += '<p style="color:#b00; font-weight:bold;">SEMIFINALES</p>';
+
+    const fallbackGames = [
+      {
+        fecha: "22/05/2025",
+        hora: "10:00",
+        disciplinaid: 3,
+        equipoLocalid: 2,
+        equipoVisitid: 4,
+        id_RolDeJuegos: 1
+      },
+      {
+        fecha: "22/05/2025",
+        hora: "12:00",
+        disciplinaid: 3,
+        equipoLocalid: 1,
+        equipoVisitid: 3,
+        id_RolDeJuegos: 2
+      },
+      {
+        fecha: "22/05/2025",
+        hora: "11:00",
+        disciplinaid: 4,
+        equipoLocalid: 4,
+        equipoVisitid: 3,
+        id_RolDeJuegos: 3
+      },
+      {
+        fecha: "22/05/2025",
+        hora: "13:00",
+        disciplinaid: 4,
+        equipoLocalid: 1,
+        equipoVisitid: 2,
+        id_RolDeJuegos: 4
+      },
+      {
+        fecha: "22/05/2025",
+        hora: "10:00",
+        disciplinaid: 1,
+        equipoLocalid: 1,
+        equipoVisitid: 6,
+        id_RolDeJuegos: 5
+      },
+      {
+        fecha: "22/05/2025",
+        hora: "12:00",
+        disciplinaid: 1,
+        equipoLocalid: 5,
+        equipoVisitid: 2,
+        id_RolDeJuegos: 6
+      },
+      // {
+      //   fecha: "22/05/2025",
+      //   hora: "11:00",
+      //   disciplinaid: 2,
+      //   equipoLocalid: 4,
+      //   equipoVisitid: 3,
+      //   id_RolDeJuegos: 7
+      // },
+      // {
+      //   fecha: "22/05/2025",
+      //   hora: "13:00",
+      //   disciplinaid: 2,
+      //   equipoLocalid: 1,
+      //   equipoVisitid: 2,
+      //   id_RolDeJuegos: 8
+      // },
+      // Puedes agregar más partidos de respaldo aquí
+    ];
+    // Mapas de respaldo
+    const fallbackEquiposMap = {
+      1: "IT Jiquilpan",
+      2: "IT Morelia",
+      3: "IT Apatzingán",
+      4: "IT Puruandiro",
+      5: "IT Purhepecha",
+      6: "IT Jilotepec",
+    };
+    const fallbackDisciplinasMap = {
+      1: "Futbol Varonil",
+      2: "Futbol Femenil",
+      3: "Voleibol Varonil",
+      4: "Voleibol Femenil",
+      5: "Basquetbol Varonil",
+      6: "Basquetbol Femenil"
+    };
+    renderCalendar(fallbackGames, fallbackEquiposMap, fallbackDisciplinasMap);
+    // Mensaje opcional debajo de la tabla
   }
 
   function convertToDate(dateStr) {
@@ -360,30 +448,31 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Mapa manual por id_RolDeJuegos
   const canchaMap = {
-    1: "Cancha Principal",
-    2: "Campo Tec",
-    3: "Campo Tec",
-    4: "Campo Tec",
+    1: "Audi Tec",
+    2: "Audi Tec",
+    3: "Audi Tec",
+    4: "Audi Tec",
     5: "Campo 1 U. Dep",
     6: "Campo 2 U. Dep",
-    7: "Campo 1 U. Dep",
-    8: "Campo 1 U. Dep",
-    9: "Campo 1 U. Dep",
-    10: "Campo 2 U. Dep",
-    11: "Campo 1 U. Dep",
-    12: "Campo 2 U. Dep",
-    13: "Campo 1 U. Dep",
-    14: "Audi Tec",
-    15: "Audi Tec",
-    16: "Audi Tec",
-    17: "ddddddddddddddd",
-    18: "Audi Tec",
-    19: "Audi Tec",
-    20: "Audi Tec",
-    21: "Audi Tec",
-    22: "Audi Tec",
-    23: "Audi Tec",
-    24: "Audi Tec",
+    // 7: "Campo 1 U. Dep",
+    // 8: "Campo 1 U. Dep",
+    // 9: "Campo 1 U. Dep",
+    // 10: "Campo 2 U. Dep",
+    // 11: "Campo 1 U. Dep",
+    // 12: "Campo 2 U. Dep",
+    // 13: "Campo 1 U. Dep",
+    // 14: "Audi Tec",
+    // 15: "Audi Tec",
+    // 16: "Audi Tec",
+    // 17: "ddddddddddddddd",
+    // 18: "Audi Tec",
+    // 19: "Audi Tec",
+    // 20: "Audi Tec",
+    // 21: "Audi Tec",
+    // 22: "Audi Tec",
+    // 23: "Audi Tec",
+    // 24: "Audi Tec",
+    25: "Audi Tec",
     // Agrega todos los ids necesarios
   };
 
