@@ -1451,3 +1451,11 @@ header {
     line-height: 20px; 
     color: var(--white);
 }
+
+/* Scroll para la tabla de posiciones de equipos en grupos */
+.points {
+  max-height: 550px; /* Puedes ajustar la altura según lo que necesites */
+  overflow-y: auto;
+  /* background: rgba(255,255,255,0.85); Opcional, para mejor visibilidad */
+  border-radius: 10px;
+}
