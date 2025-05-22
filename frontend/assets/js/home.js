@@ -170,6 +170,7 @@ function handleMenuError(error) {
       <li><a href="./discVolley.html" class="menu-link">VOLEIBOL</a></li>
       <li><a href="./discFutbol.html" class="menu-link">FÚTBOL</a></li>
   `;
+  setupMenuInteractions(); // Asegura funcionalidad del menú de respaldo
 }
 
 /* ========================================== FETCH ========================================== */
