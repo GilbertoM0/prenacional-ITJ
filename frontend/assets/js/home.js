@@ -164,11 +164,11 @@ function closeAllSubmenus() {
 // Manejo de errores
 function handleMenuError(error) {
   console.error('Error en el menú:', error);
-  document.querySelector('.subdiscience').innerHTML = `
-      <li class="error-message">
-          <ion-icon name="warning-outline"></ion-icon>
-          Error cargando disciplinas
-      </li>
+  // Menú de respaldo si no carga la API
+  document.querySelector('.subdiscipline').innerHTML = `
+      <li><a href="./discBasquet.html" class="menu-link">BÁSQUETBOL</a></li>
+      <li><a href="./discVolley.html" class="menu-link">VOLEIBOL</a></li>
+      <li><a href="./discFutbol.html" class="menu-link">FÚTBOL</a></li>
   `;
 }
 
@@ -177,9 +177,16 @@ async function fetchDisciplines() {
   try {
       const response = await fetch('https://back-prenacional-production.up.railway.app/api/disciplinas');
       if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-      return response.json();
+      const data = await response.json();
+      // Si la API responde vacío, usar menú de respaldo
+      if (!Array.isArray(data) || data.length === 0) {
+        handleMenuError('Sin datos de disciplinas');
+        return [];
+      }
+      return data;
   } catch(error) {
       console.error('Error obteniendo disciplinas:', error);
+      handleMenuError(error);
       return [];
   }
 }
