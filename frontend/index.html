@@ -292,16 +292,45 @@ document.addEventListener("DOMContentLoaded", async () => {
       ])
     );
 
-    renderCalendar(gamesData, equiposMap, disciplinasMap);
+    // Mostrar solo los partidos del día actual (soporta formato YYYY-MM-DD y DD/MM/YYYY)
+    const today = new Date();
+    const todayStr = `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth()+1).toString().padStart(2, '0')}/${today.getFullYear()}`;
+    const todayGames = gamesData.filter(game => {
+      if (!game.fecha) return false;
+      // Si viene en formato YYYY-MM-DD
+      if (/^\d{4}-\d{2}-\d{2}$/.test(game.fecha)) {
+        const [y, m, d] = game.fecha.split('-');
+        return `${d}/${m}/${y}` === todayStr;
+      }
+      // Si viene en formato DD/MM/YYYY
+      return game.fecha === todayStr;
+    });
+    renderCalendar(todayGames, equiposMap, disciplinasMap);
 
     document.getElementById("sortAscending").addEventListener("click", () => {
       const sortedGames = sortGamesByDate(gamesData, 'asc');
-      renderCalendar(sortedGames, equiposMap, disciplinasMap);
+      const sortedTodayGames = sortedGames.filter(game => {
+        if (!game.fecha) return false;
+        if (/^\d{4}-\d{2}-\d{2}$/.test(game.fecha)) {
+          const [y, m, d] = game.fecha.split('-');
+          return `${d}/${m}/${y}` === todayStr;
+        }
+        return game.fecha === todayStr;
+      });
+      renderCalendar(sortedTodayGames, equiposMap, disciplinasMap);
     });
 
     document.getElementById("sortDescending").addEventListener("click", () => {
       const sortedGames = sortGamesByDate(gamesData, 'desc');
-      renderCalendar(sortedGames, equiposMap, disciplinasMap);
+      const sortedTodayGames = sortedGames.filter(game => {
+        if (!game.fecha) return false;
+        if (/^\d{4}-\d{2}-\d{2}$/.test(game.fecha)) {
+          const [y, m, d] = game.fecha.split('-');
+          return `${d}/${m}/${y}` === todayStr;
+        }
+        return game.fecha === todayStr;
+      });
+      renderCalendar(sortedTodayGames, equiposMap, disciplinasMap);
     });
 
   } catch (error) {
@@ -479,6 +508,45 @@ document.addEventListener("DOMContentLoaded", async () => {
     27: "Audi Tec",
     29: "Campo 1 U. Dep",
     30: "Campo 1 U. Dep",
+    31: "Audi Tec",
+    32: "Audi Tec",
+    33: "Audi Tec",
+    34: "Audi Tec",
+    35: "Audi Tec",
+    36: "Audi Tec",
+    37: "Audi Tec",
+    38: "Audi Tec",
+    39: "Audi Tec",
+    40: "Audi Tec",
+    41: "Audi Tec",
+    42: "Audi Tec",
+    43: "Audi Tec",
+    44: "Audi Tec",
+    45: "Audi Tec",
+    46: "Audi Tec",
+    47: "Audi Tec",
+    48: "Audi Tec",
+    49: "Audi Tec",
+    50: "Audi Tec",
+    
+    51: "Audi Tec",
+    52: "Audi Tec",
+    53: "Audi Tec",
+    54: "Audi Tec",
+    55: "Audi Tec",
+    56: "Audi Tec",
+    57: "Audi Tec",
+    58: "Audi Tec",
+    59: "Audi Tec",
+    60: "Audi Tec",
+
+
+
+
+
+
+
+    
     // Agrega todos los ids necesarios
   };
 
