@@ -408,6 +408,15 @@ function resetAnimations() {
 /* =================== NAVEGACIÓN DE EQUIPOS =================== */
 // Renderiza una tarjeta de equipo con logo y tabla de puntos única
 function renderTeamCard(team, logo, point) {
+    // Calcular AVG (PF/PC)
+    let avg = '';
+    if (point.puntosAFavor !== undefined && point.puntosEnContra !== undefined && point.puntosEnContra > 0) {
+        avg = (point.puntosAFavor / point.puntosEnContra).toFixed(2);
+    } else if (point.puntosAFavor !== undefined && point.puntosEnContra == 0) {
+        avg = point.puntosAFavor > 0 ? '∞' : '0.00';
+    } else {
+        avg = '';
+    }
     return `
       <div class="equipo-card">
         <div class="team-header">
@@ -422,6 +431,7 @@ function renderTeamCard(team, logo, point) {
               <th>JP</th>
               <th>PF</th>
               <th>PC</th>
+              <th>AVG</th>
               <th>DP</th>
               <th>PTS</th>
             </tr>
@@ -433,6 +443,7 @@ function renderTeamCard(team, logo, point) {
               <td>${point.partidosPerdidos ?? ''}</td>
               <td>${point.puntosAFavor ?? ''}</td>
               <td>${point.puntosEnContra ?? ''}</td>
+              <td>${avg}</td>
               <td>${point.diferenciaPuntos ?? ''}</td>
               <td>${point.puntosTotales ?? ''}</td>
             </tr>
@@ -489,6 +500,15 @@ async function renderTeams(teams) {
 
         // Para compatibilidad con vista de escritorio, también agregar formato tradicional
         if (window.innerWidth > 768) {
+            // Calcular AVG (PF/PC)
+            let avg = '';
+            if (point.puntosAFavor !== undefined && point.puntosEnContra !== undefined && point.puntosEnContra > 0) {
+                avg = (point.puntosAFavor / point.puntosEnContra).toFixed(2);
+            } else if (point.puntosAFavor !== undefined && point.puntosEnContra == 0) {
+                avg = point.puntosAFavor > 0 ? '0.00' : '0.00';
+            } else {
+                avg = '';
+            }
             const teamHTML = `
                 <div class="sections teams">
                     <div class="team">
@@ -504,6 +524,7 @@ async function renderTeams(teams) {
                         <div>${point.partidosPerdidos ?? ''}</div>
                         <div>${point.puntosAFavor ?? ''}</div>
                         <div>${point.puntosEnContra ?? ''}</div>
+                        <div>${avg}</div>
                         <div>${point.diferenciaPuntos ?? ''}</div>
                         <div class="pts">${point.puntosTotales ?? ''}</div>                </div>
             </div>
