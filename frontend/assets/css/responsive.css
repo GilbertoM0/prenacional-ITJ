@@ -538,16 +538,57 @@
   .equipo-card .numberPoints-table th,
   .equipo-card .numberPoints-table td {
     text-align: center;
-    padding: 6px 2px;
-    font-size: 0.98em;
-    border-bottom: 1px solid #e0e0e0;
+    padding: 4px 1px;
+    font-size: 0.85em;
+    min-width: 32px;
+    max-width: 38px;
+    word-break: break-word;
   }
   .equipo-card .numberPoints-table th {
-    background: #e3eaf6;
-    font-weight: 700;
-    color: #294B7D;
-    font-size: 1em;
-  }  .equipo-card .numberPoints-table tr:last-child td {
-    border-bottom: none;
+    font-size: 0.95em;
+  }
+  .equipo-card .numberPoints-table {
+    table-layout: fixed;
+  }
+  .sections.titlePoints,
+  .numberPoints {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(32px, 1fr));
+    gap: 0;
+    overflow-x: auto;
+    width: 100%;
+  }
+  .sections.titlePoints div,
+  .numberPoints div {
+    font-size: 0.92em;
+    min-width: 32px;
+    max-width: 38px;
+    padding: 4px 1px;
+    word-break: break-word;
+  }
+  /* Scroll horizontal para tablas si la pantalla es muy pequeña */
+  .container-tabla, .points {
+    overflow-x: auto;
+    width: 100%;
+  }
+  /* Ajuste para tablas dentro de tarjetas */
+  .equipo-card .numberPoints-table {
+    table-layout: fixed;
+    width: 100%;
+    min-width: 320px;
+    overflow-x: auto;
+  }
+  .equipo-card .numberPoints-table th,
+  .equipo-card .numberPoints-table td {
+    min-width: 32px;
+    max-width: 38px;
+    font-size: 0.85em;
+    padding: 4px 1px;
+    word-break: break-word;
+  }
+  .sections.titlePoints {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0;
   }
 }}

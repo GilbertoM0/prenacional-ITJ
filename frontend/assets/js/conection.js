@@ -413,7 +413,7 @@ function renderTeamCard(team, logo, point) {
     if (point.puntosAFavor !== undefined && point.puntosEnContra !== undefined && point.puntosEnContra > 0) {
         avg = (point.puntosAFavor / point.puntosEnContra).toFixed(2);
     } else if (point.puntosAFavor !== undefined && point.puntosEnContra == 0) {
-        avg = point.puntosAFavor > 0 ? '∞' : '0.00';
+        avg = point.puntosAFavor > 0 ? '0.00' : '0.00';
     } else {
         avg = '';
     }
