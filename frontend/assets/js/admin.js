@@ -1789,6 +1789,7 @@ async function DeletePlayer() {
             const teamsList = await getTeamsByDiscipline(ids);
             const idsT = teamsList.map(t => t.id_equipo);
 
+
             const players = await getPlayersByTeams(idsT);
 
             container.innerHTML = `
@@ -2065,7 +2066,7 @@ async function getPlayerDisc(teamID) {
 /* ========================================== POST ========================================== */
 async function createGroup(groupData) {
     try {
-        const response = await fetch('http://localhost:3000/api/grupos', {
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/grupos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -2085,7 +2086,7 @@ async function createGroup(groupData) {
 
 async function createTeam(groupData) {
     try {
-        const response = await fetch('http://localhost:3000/api/equipo', {
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/equipo', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -2105,7 +2106,7 @@ async function createTeam(groupData) {
 
 async function createPlayer(groupData) {
     try {
-        const response = await fetch('http://localhost:3000/api/jugador', {
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/jugador', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -2125,7 +2126,7 @@ async function createPlayer(groupData) {
 
 async function modifyGroup(groupData, ID) {
     try {
-        const response = await fetch(`http://localhost:3000/api/grupos/${ID}?`, {
+        const response = await fetch(`https://back-prenacional-production.up.railway.app/api/grupos/${ID}?`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -2145,7 +2146,7 @@ async function modifyGroup(groupData, ID) {
 
 async function modifyTeam(groupData, ID) {
     try {
-        const response = await fetch(`http://localhost:3000/api/equipo/${ID}?`, {
+        const response = await fetch(`https://back-prenacional-production.up.railway.app/api/equipo/${ID}?`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -2165,7 +2166,7 @@ async function modifyTeam(groupData, ID) {
 
 async function deleteGroup(ID) {
     try {
-        const response = await fetch(`http://localhost:3000/api/grupos/${ID}`, {
+        const response = await fetch(`https://back-prenacional-production.up.railway.app/api/grupos/${ID}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -2184,7 +2185,7 @@ async function deleteGroup(ID) {
 
 async function deleteTeam(ID) {
     try {
-        const response = await fetch(`http://localhost:3000/api/equipo/${ID}`, {
+        const response = await fetch(`https://back-prenacional-production.up.railway.app/api/equipo/${ID}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -2203,7 +2204,7 @@ async function deleteTeam(ID) {
 
 async function deletePlayer(ID) {
     try {
-        const response = await fetch(`http://localhost:3000/api/jugador/${ID}`, {
+        const response = await fetch(`https://back-prenacional-production.up.railway.app/api/jugador/${ID}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -2223,7 +2224,7 @@ async function deletePlayer(ID) {
 /* ========================================== FETCH ========================================== */
 async function fetchDisciplines() {
   try {
-      const response = await fetch('http://localhost:3000/api/disciplinas');
+      const response = await fetch('https://back-prenacional-production.up.railway.app/api/disciplinas');
       if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
       return response.json();
   } catch(error) {
@@ -2234,7 +2235,7 @@ async function fetchDisciplines() {
 
 async function fetchGroups() {
     try {
-        const response = await fetch('http://localhost:3000/api/grupos');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/grupos');
         if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
     } catch(error) {
@@ -2245,7 +2246,7 @@ async function fetchGroups() {
 
 async function fetchTeams() {
     try {
-        const response = await fetch('http://localhost:3000/api/equipo');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/equipo');
         if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
     } catch(error) {
@@ -2256,7 +2257,7 @@ async function fetchTeams() {
 
 async function fetchTecs() {
     try {
-        const response = await fetch('http://localhost:3000/api/tecs');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/tecs');
         if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
     } catch(error) {
@@ -2267,7 +2268,7 @@ async function fetchTecs() {
 
 async function fetchPlayers() {
     try {
-        const response = await fetch('http://localhost:3000/api/jugador');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/jugador');
         if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
     } catch(error) {
@@ -2278,7 +2279,7 @@ async function fetchPlayers() {
 
 async function fetchPartidos() {
     try {
-        const response = await fetch('http://localhost:3000/api/partido');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/partido');
         if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
     } catch(error) {
@@ -2289,7 +2290,7 @@ async function fetchPartidos() {
 
 async function fetchRoles() {
     try {
-        const response = await fetch('http://localhost:3000/api/roldejuegos');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/roldejuegos');
         if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
     } catch(error) {
@@ -2300,7 +2301,7 @@ async function fetchRoles() {
 
 async function fetchClasificacion() {
     try {
-        const response = await fetch('http://localhost:3000/api/clasificacion');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/clasificacion');
         if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
     } catch(error) {
@@ -2311,7 +2312,7 @@ async function fetchClasificacion() {
 
 async function fetchCancha() {
     try {
-        const response = await fetch('http://localhost:3000/api/cancha');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/cancha');
         if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
     } catch(error) {
@@ -2322,7 +2323,7 @@ async function fetchCancha() {
 
 async function fetchRestaurantes() {
     try {
-        const response = await fetch('http://localhost:3000/api/puntosdeinteres');
+        const response = await fetch('https://back-prenacional-production.up.railway.app/api/puntosdeinteres');
         if(!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         return response.json();
     } catch(error) {
