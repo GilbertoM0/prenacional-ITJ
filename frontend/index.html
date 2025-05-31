@@ -175,7 +175,7 @@
                 </div>
 
                 <div class="phones">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#A7C4E5"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#A7C4E5"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/></svg>
 
                     <div class="phoneText">
                         <p class="phonePeople">CORREO</p>
@@ -190,7 +190,7 @@
 
             <div class="emerPhones">
                 <div class="phones">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#A7C4E5"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#A7C4E5"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
 
                     <div class="phoneText">
                         <p class="phonePeople">DIRECCIÓN</p>
@@ -472,12 +472,35 @@ document.addEventListener("DOMContentLoaded", async () => {
   calendarDiv.querySelectorAll("table").forEach(table => table.remove());
 
   if (!Array.isArray(games)) {
-    calendarDiv.innerHTML += "<p>Tenemos muchas peticiones, estamos trabajando en eso, gracias por usar la pagina :).</p>";
+    calendarDiv.innerHTML += "<p>Evento concluido, gracias por usar la pagina :).</p>";
     return;
   }
 
   if (games.length === 0) {
-    calendarDiv.innerHTML += "<p>Tenemos muchas peticiones, estamos trabajando en eso, gracias por usar la pagina :).</p>";
+    calendarDiv.innerHTML += `
+      <div style="
+        background: linear-gradient(90deg, #6528f7 0%, #a7c4e5 100%);
+        color: #fff;
+        border-radius: 18px;
+        padding: 32px 18px;
+        margin: 32px auto;
+        max-width: 500px;
+        box-shadow: 0 4px 24px #6528f733;
+        text-align: center;
+        font-size: 1.35rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        position: relative;
+        overflow: hidden;
+      ">
+        <svg style="position:absolute;top:18px;left:18px;opacity:0.18;z-index:0;" width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-2.83.48-5.48-1.51-5.96-4.34-.07-.39.23-.75.63-.75.31 0 .58.22.63.52.36 2.13 2.37 3.57 4.5 3.21 1.7-.29 3.01-1.7 3.21-3.41.04-.32.31-.55.63-.55.4 0 .7.36.63.75-.37 2.19-2.23 3.81-4.27 3.81-.17 0-.34-.01-.5-.03v.01zm6.36-2.49c-.2.32-.62.42-.93.22-.32-.2-.42-.62-.22-.93C18.99 14.36 19.5 13.22 19.5 12c0-4.14-3.36-7.5-7.5-7.5S4.5 7.86 4.5 12c0 1.22.51 2.36 1.29 3.23.2.32.1.74-.22.93-.32.2-.74.1-.93-.22C3.51 14.36 3 13.22 3 12c0-5.52 4.48-10 10-10s10 4.48 10 10c0 1.22-.51 2.36-1.29 3.23z" fill="#fff"/></svg>
+        <div style="position:relative;z-index:1;">
+          <h2 style="margin-bottom: 12px; font-size: 2rem; font-weight: bold; letter-spacing: 1px;">¡El evento ha concluido!</h2>
+          <p style="margin-bottom: 10px;">Visita la sección de <a href='./Galeria/galeria.html' style='color:#ffe066; text-decoration:underline; font-weight:bold;'>galería</a> y guarda tu mejor foto.</p>
+          <p style="margin-bottom: 0; font-size: 1.1rem;">¡Gracias por usar la página!</p>
+        </div>
+      </div>
+    `;
     return;
   }
 
